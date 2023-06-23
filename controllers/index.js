@@ -1,7 +1,9 @@
-const PageController = require('./PageController');
 const UserController = require('./UserController');
+const ExerciseController = require('./ExerciseController');
+const ChallengeController = require('./ChallengeController');
 
 module.exports = {
-  PageController,
   UserController,
+  ExerciseController,
+  ChallengeController,
 };
