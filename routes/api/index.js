@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { UserController } = require('../../controllers');
+const challengeRoute = require('./ChallengeRoutes');
+const exerciseRoute = require('./ExerciseRoutes');
+const userRoutes = require('./UserRoutes');
 
-const isAuthenticated = require('../../middleware/isAuthenticated');
-
-router.post('/register', UserController.register);
-router.post('/login', UserController.login);
-router.post('/logout', isAuthenticated, UserController.logout);
+router.use('/exercise', exerciseRoute);
+router.use('/challenge', challengeRoute);
+router.use('/user', userRoutes);
 
 module.exports = router;
