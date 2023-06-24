@@ -36,7 +36,6 @@ Exercise.init(
       allowNull: true,
     },
   },
-  //other properties to add
   {
     sequelize,
     timestamps: false,
