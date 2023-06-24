@@ -11,14 +11,29 @@ Exercise.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    challenge_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'challenge',
-        key: 'id',
-        unique: false,
-      },
-      //other properties to add
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    muscle: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    equipment: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    difficulty: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    instructions: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

@@ -1,9 +1,9 @@
-const UserController = require('./UserController');
-const ExerciseController = require('./ExerciseController');
-const ChallengeController = require('./ChallengeController');
+const router = require('express').Router();
 
-module.exports = {
-  UserController,
-  ExerciseController,
-  ChallengeController,
-};
+const apiRoutes = require('./api');
+const pageRoutes = require('./pages');
+
+router.use('/', pageRoutes);
+router.use('/api', apiRoutes);
+
+module.exports = router;

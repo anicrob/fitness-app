@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../db/config');
 
-class Challenge extends Model {}
+class UserExercise extends Model {}
 
-Challenge.init(
+UserExercise.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,9 +19,13 @@ Challenge.init(
         unique: false,
       },
     },
-    completed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+    exercise_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'exercise',
+        key: 'id',
+        unique: false,
+      },
     },
   },
   {
@@ -29,8 +33,8 @@ Challenge.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'challenge',
+    modelName: 'userexercise',
   }
 );
 
-module.exports = Challenge;
+module.exports = UserExercise;

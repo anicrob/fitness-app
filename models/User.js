@@ -28,7 +28,26 @@ User.init(
         len: [8],
       },
     },
-    //need to add age, height, weight, BMI, Number of saved challenges, number of completed challenges
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    height: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    BMI: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    numSavedExercises: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    numCompletedChallenges: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     hooks: {
