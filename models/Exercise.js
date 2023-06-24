@@ -12,27 +12,27 @@ Exercise.init(
       autoIncrement: true,
     },
     name: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     type: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: true,
     },
     muscle: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: true,
     },
     equipment: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: true,
     },
     difficulty: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: true,
     },
     instructions: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(3500),
       allowNull: true,
     },
   },
