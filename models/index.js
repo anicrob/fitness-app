@@ -4,7 +4,7 @@ const User = require('./User');
 
 // Challenge have many Exercises
 Challenge.hasMany(Exercise, {
-  foreignKey: 'exercise_id',
+  foreignKey: 'challenge_id',
 });
 
 //User has many challenges (although user can only see their current one)
@@ -15,7 +15,7 @@ User.hasMany(Challenge, {
 
 //User has many exercises
 User.hasMany(Exercise, {
-  foreignKey: 'exercise_id',
+  foreignKey: 'user_id',
 });
 
 module.exports = {
