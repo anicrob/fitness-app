@@ -76,22 +76,22 @@ const seedTables = async () => {
     // const triceps = require('./triceps.json');
 
     await Exercise.bulkCreate([
-      abdominals,
-      abductors,
-      adductors,
-      biceps,
-      calves,
-      chest,
-      forearms,
-      glutes,
-      hamstrings,
-      lats,
-      lowerBack,
-      middleBack,
-      neck,
-      quadricepts,
-      traps,
-      // triceps,
+      ...abdominals,
+      ...abductors,
+      ...adductors,
+      ...biceps,
+      ...calves,
+      ...chest,
+      ...forearms,
+      ...glutes,
+      ...hamstrings,
+      ...lats,
+      ...lowerBack,
+      ...middleBack,
+      ...neck,
+      ...quadricepts,
+      ...traps,
+      ...triceps,
     ]);
     console.log('========== Tables Successfully Seeded =============');
 
