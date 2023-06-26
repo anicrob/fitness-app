@@ -35,6 +35,14 @@ Exercise.init(
       type: DataTypes.STRING(3500),
       allowNull: true,
     },
+    user_id: {
+      type: DataTypes.UUID,
+      references: {
+        model: 'user',
+        key: 'id',
+        unique: false,
+      },
+    },
   },
   {
     sequelize,

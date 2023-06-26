@@ -5,7 +5,7 @@ const path = require('path');
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
 require('dotenv').config();
-// const userSeeds = require('./users.json');
+const userSeeds = require('./users.json');
 
 const muscle = [
   'abdominals',
@@ -27,19 +27,15 @@ const muscle = [
   'triceps',
 ];
 
-// const seedUserTable = async () => {
-//   await sequelize.sync({ force: true });
+const seedTables = async () => {
+  await sequelize.sync({ force: true });
+  await User.bulkCreate(userSeeds, {
+    individualHooks: true,
+    returning: true,
+  });
 
-//   await User.bulkCreate(userSeeds, {
-//     individualHooks: true,
-//     returning: true,
-//   });
+  console.log('========== User Table Successfully Seeded =============');
 
-//   process.exit(0);
-// };
-// console.log('========== User Table Successfully Seeded =============');
-
-const seedExerciseTable = async () => {
   for (var i = 0; i < muscle.length; i++) {
     const response = await fetch(
       `https://api.api-ninjas.com/v1/exercises?muscle=${muscle[i]}`,
@@ -79,8 +75,6 @@ const seedExerciseTable = async () => {
     const traps = require('./traps.json');
     // const triceps = require('./triceps.json');
 
-    await sequelize.sync({ force: true });
-
     await Exercise.bulkCreate([
       abdominals,
       abductors,
@@ -99,11 +93,10 @@ const seedExerciseTable = async () => {
       traps,
       // triceps,
     ]);
-    console.log('========== Exercise Table Successfully Seeded =============');
+    console.log('========== Tables Successfully Seeded =============');
 
     process.exit(0);
   }
 };
 
-seedExerciseTable();
-// seedUserTable();
+seedTables();

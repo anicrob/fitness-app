@@ -3,15 +3,8 @@ const Exercise = require('./Exercise');
 const User = require('./User');
 
 // Challenge have many Exercises
-Challenge.belongsToMany(Exercise, {
-  foreignKey: 'challenge_id',
-  through: 'exercisechallenge',
-});
-
-// Exercise can be assigned to many Challenges
-Exercise.belongsToMany(Challenge, {
+Challenge.hasMany(Exercise, {
   foreignKey: 'exercise_id',
-  through: 'exercisechallenge',
 });
 
 //User has many challenges (although user can only see their current one)
@@ -20,21 +13,9 @@ User.hasMany(Challenge, {
   onDelete: 'CASCADE',
 });
 
-//challenge belongsTo User
-Challenge.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-
 //User has many exercises
-User.belongsToMany(Exercise, {
-  foreignKey: 'user_id',
-  through: 'userexercise',
-});
-
-//exercise can be saved to many users
-Exercise.belongsToMany(User, {
+User.hasMany(Exercise, {
   foreignKey: 'exercise_id',
-  through: 'userexercise',
 });
 
 module.exports = {
@@ -42,3 +23,6 @@ module.exports = {
   Exercise,
   User,
 };
+
+//challenge = post
+//exercise = comments
