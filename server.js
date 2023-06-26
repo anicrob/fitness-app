@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const hbs = exphbs.create();
 
+require('dotenv').config();
+
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
   cookie: {},

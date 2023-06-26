@@ -1,20 +1,14 @@
 [
   {
-    "firstName": "Tony",
-    "lastName": "Stark",
-    "email": "ironman@example.com",
+    "username": "ironman",
     "password": "password1234"
   },
   {
-    "firstName": "Steve",
-    "lastName": "Rogers",
-    "email": "captainamerica@example.com",
+    "username": "captainamerica",
     "password": "password1234"
   },
   {
-    "firstName": "Carol",
-    "lastName": "Danvers",
-    "email": "captainmarvel@example.com",
+    "username": "captainmarvel",
     "password": "password1234"
   }
 ]
