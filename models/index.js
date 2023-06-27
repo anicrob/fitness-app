@@ -4,26 +4,13 @@ const User = require('./User');
 
 User.hasMany(Challenge, {
   foreignKey: 'user_id',
-  onDelete: 'CASCADE',
 });
 
-Challenge.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-
-Challenge.hasMany(Exercise, {
+Exercise.hasMany(Challenge, {
   foreignKey: 'exercise_id',
 });
 
-Exercise.belongsTo(Challenge, {
-  foreignKey: 'exercise_id',
-});
-
-User.hasMany(Exercise, {
-  foreignKey: 'exercise_id',
-});
-
-Exercise.belongsTo(User, {
+Exercise.hasMany(User, {
   foreignKey: 'exercise_id',
 });
 

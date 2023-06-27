@@ -1,6 +1,6 @@
 // routes/pages/pageRoutes.js
 const router = require('express').Router();
-const withAuth = require('../../middleware/auth');
+const withAuth = require('../../middleware/isAuthenticated');
 const { User, Exercise, Challenge } = require('../../models');
 
 //render homepage and get all exercises w/ user data

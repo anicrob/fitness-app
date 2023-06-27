@@ -7,7 +7,8 @@
     "dev": "nodemon server.js",
     "seed": "node seeds",
     "lint": "eslint --fix --ext .js .",
-    "test": "test"
+    "test": "test",
+    "develop": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -27,7 +28,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.22",
     "prettier": "2.8.8"
   }
 }
