@@ -1,1 +1,56 @@
+<!-- dashboard.handlebars -->
+
 <h1 class="text-center mt-5">{{ welcomeMessage }}</h1>
+
+<div class="filter-section">
+  <form id="exercise-form">
+    <select id="difficulty-select">
+      <option value="">Select Difficulty</option>
+    </select>
+    <select id="muscle-group-select">
+      <option value="">Select Muscle Group</option>
+    </select>
+    <select id="exercise-type-select">
+      <option value="">Select Exercise Type</option>
+    </select>
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<div class="workouts-container">
+  <div class="workouts-group">
+    <h2>Workouts Group 1</h2>
+    {{#each workoutsGroup1}}
+      <div class="workout">
+        <!-- Display workout details here -->
+      </div>
+    {{/each}}
+    <div class="add-workout">
+      [add]
+    </div>
+  </div>
+
+  <div class="workouts-group">
+    <h2>Workouts Group 2</h2>
+    {{#each workoutsGroup2}}
+      <div class="workout">
+        <!-- Display workout details here -->
+      </div>
+    {{/each}}
+    <div class="add-workout">
+      <button>add</button>
+    </div>
+  </div>
+
+  <div class="workouts-group">
+    <h2>Workouts Group 3</h2>
+    {{#each workoutsGroup3}}
+      <div class="workout">
+        <!-- Display workout details here -->
+      </div>
+    {{/each}}
+    <div class="add-workout">
+      <button>add</button>
+    </div>
+  </div>
+</div>
