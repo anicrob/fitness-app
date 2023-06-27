@@ -46,11 +46,12 @@ const seedTables = async () => {
       }
     );
     const data = await response.json();
-    console.log('should be exercises>>>>>>', data);
     fs.writeFile(
       path.join(__dirname, `${muscle[i]}.json`),
       JSON.stringify(data),
-      err => console.log(err)
+      err => {
+        if (err) console.log(err);
+      }
     );
     if (i == 15) {
       var done = true;
@@ -73,7 +74,6 @@ const seedTables = async () => {
     const neck = require('./neck.json');
     const quadricepts = require('./quadriceps.json');
     const traps = require('./traps.json');
-    // const triceps = require('./triceps.json');
 
     await Exercise.bulkCreate([
       ...abdominals,
@@ -91,7 +91,6 @@ const seedTables = async () => {
       ...neck,
       ...quadricepts,
       ...traps,
-      ...triceps,
     ]);
     console.log('========== Tables Successfully Seeded =============');
 
