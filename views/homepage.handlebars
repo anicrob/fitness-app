@@ -1,1 +1,56 @@
-<h1 class="text-center mt-5">Welcome to the Site!</h1>
+<h1 class="text-center mt-5">Exercise Homepage</h1>
+<div class="search-section">
+
+</div>
+<form>
+ <label for="difficulty">Difficulty</label>
+<select id="difficulty" name="dificulty">
+  <option value="beginner">beginner</option>
+  <option value="intermediate">intermediate</option>
+  <option value="expert">expert</option>
+</select>
+ <label for="muscle">Muscle</label>
+<select id="muscle" name="muscle">
+  <option value="abdominals">abdominals</option>
+  <option value="abductors">abductors</option>
+  <option value="adductors">adductors</option>
+  <option value="biceps">biceps</option>
+  <option value="calves">calves</option>
+  <option value="chest">chest</option>
+  <option value="forearms">forearms</option>
+  <option value="glutes">glutes</option>
+  <option value="lats">lats</option>
+  <option value="lower_back">lower back</option>
+  <option value="middle_back">middle back</option>
+  <option value="neck">neck</option>
+  <option value="quadriceps">quadriceps</option>
+  <option value="traps">traps</option>
+</select>
+<label for="type">Type</label>
+<select id="type" name="type">
+  <option value="cardio">cardio</option>
+  <option value="olympic_weightlifting">Olympic Weightlifting</option>
+  <option value="plyometrics">plyometrics</option>
+  <option value="powerlifting">powerlifting</option>
+  <option value="strength">strength</option>
+  <option value="stretching">stretching</option>
+  <option value="strongman">strongman</option>
+</select>
+    <button type="submit" class="btn btn-primary btn-lg w-100 mt-4 p-3">Search</button>
+</form>
+<div class="exercise-section-db">
+    {{#each exercises as |exercise|}}
+        <div class="exercise-card">
+            <p>{{exercise.name}}</p>
+            <p>{{exercise.type}}</p>
+            <p>{{exercise.muscle}}</p>
+            <p>{{exercise.equipment}}</p>
+            <p>{{exercise.difficulty}}</p>
+            <p>{{exercise.instructions}}</p>
+            <button data-exercise-id="{{exercise.id}}">Add</button>
+        </div>
+    {{/each}}
+</div>
+
+<script src="/js/getFilteredExercises.js"></script>
+<script src="/js/addExercise.js"></script>

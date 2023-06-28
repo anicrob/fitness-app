@@ -3,8 +3,8 @@ const challengeRoute = require('./ChallengeRoutes');
 const exerciseRoute = require('./ExerciseRoutes');
 const userRoutes = require('./UserRoutes');
 
-router.use('/exercise', exerciseRoute);
-router.use('/challenge', challengeRoute);
-router.use('/user', userRoutes);
+router.use('/exercises', exerciseRoute);
+router.use('/challenges', challengeRoute);
+router.use('/users', userRoutes);
 
 module.exports = router;

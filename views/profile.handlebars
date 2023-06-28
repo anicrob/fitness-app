@@ -1,0 +1,69 @@
+<h1 class="text-center mt-5">My Dashboard</h1>
+<div id="username-welcome">
+Welcome {{user.username}}!
+</div>
+<div id="user-info-pannel">
+    My Health Details:
+    <p>
+        age:
+        <input id="user-age" value="{{user.age}}"></input>
+    </p>
+    <p>
+        height:
+        <input id="user-height" value="{{user.height}}"></input>
+
+    </p>
+    <p>
+        weight:
+        <input id="user-weight" value="{{user.weight}}"></input>
+
+    </p>
+    <p>
+        BMI: 
+         <input id="user-BMI" value="{{user.BMI}}"></input>
+
+    </p>
+    <button id="save-user-health-details">Save</button>
+</div>
+<div id="profile-stats-pannel">
+    My Stats:
+    <p>Number of currently saved exercises:
+        {{#if user.numSavedExercises}}
+        {{user.numSavedExercises}}
+        {{else}}
+        Start today by going to the homepage and saving a challenge!
+        {{/if}}
+    </p>
+    <p>Number of completed challenges: 
+        {{#if user.numCompletedChallenges}}
+        {{user.numCompletedChallenges}}
+        {{else}}
+        Complete a challenge today!
+        {{/if}}
+    </p>
+</div>
+<div id="current-challenge-pannel">
+    Current Challenge:
+    <p>x<span id="random-num-1">3</span> Exercise 1</p>
+    <p>exercise details here</p>
+    <p>x<span id="random-num-2">50</span> Exercise 2</p>
+    <p>Xexercise details here</p>
+    <p>x<span id="random-num-3">20</span> Exercise 3</p>
+    <p>exercise details here</p>
+    <button id="btn-giveup">Give Up 😩</button>
+    <button id="btn-giveup">Completed 💪</button>
+</div>
+<button>Generate Challenge! ⛰️</button>
+<div id="saved-exercises section">
+    <h2>Saved Exercises</h2>
+    {{!-- {{#if user.exercise_id}} --}}
+    {{!-- {{#each user.exercise_id as |exercise|}} --}}
+    <div class="saved-exercise-card">
+        <p>exercise details here</p>
+        <button data-exercise-id="{{exercise.id}}" class="remove-exerciseBtn">X</button>
+    </div>
+    {{!-- {{/each}} --}}
+    {{!-- {{else}}
+    Save an exercise today!
+    {{/if}} --}}
+</div>

@@ -40,6 +40,15 @@ User.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    exercise_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'exercise',
+        key: 'id',
+        unique: false,
+      },
+    },
     numSavedExercises: {
       type: DataTypes.INTEGER,
       allowNull: true,
