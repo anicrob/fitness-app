@@ -1,37 +1,26 @@
-const registrationHandler = async event => {
+//sign up functionality
+const signupFormHandler = async event => {
   event.preventDefault();
 
-  const firstName = document.querySelector('#firstName').value.trim();
-  const lastName = document.querySelector('#lastName').value.trim();
-  const email = document.querySelector('#email').value.trim();
+  const username = document.querySelector('#username').value.trim();
   const password = document.querySelector('#password').value.trim();
 
-  if (email && password) {
-    const response = await fetch('/api/register', {
+  //create new user
+  if (username && password) {
+    const response = await fetch('/api/users', {
       method: 'POST',
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password,
-      }),
+      body: JSON.stringify({ username, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      document.location.replace('/dashboard');
+      document.location.replace('/');
     } else {
-      const { message } = await response.json();
-      // eslint-disable-next-line no-undef
-      showAlert({
-        target: 'registration-alert',
-        message,
-        type: 'danger',
-      });
+      alert(response.statusText);
     }
   }
 };
-
+//event listener
 document
-  .querySelector('.registration-form')
-  .addEventListener('submit', registrationHandler);
+  .querySelector('#registration-form')
+  .addEventListener('submit', signupFormHandler);

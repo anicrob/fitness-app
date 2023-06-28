@@ -5,12 +5,14 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sequelize = require('./db/config');
-const routes = require('./routes');
+const routes = require('./controllers');
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 const hbs = exphbs.create();
+
+require('dotenv').config();
 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
