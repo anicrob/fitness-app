@@ -1,8 +1,8 @@
 const isAuthenticated = (req, res, next) => {
-  if (req.session.isAuthenticated) {
+  if (req.session.logged_in) {
     return next();
   }
-  return res.redirect('/');
+  return res.redirect('/login');
 };
 
 module.exports = isAuthenticated;

@@ -6,10 +6,10 @@ const logout = async () => {
   });
 
   if (response.ok) {
-    document.location.reload();
+    document.location.replace('/login');
   } else {
     alert(response.statusText);
   }
 };
 //event listener
-document.querySelector('.logout').addEventListener('click', logout);
+document.querySelector('#logout').addEventListener('click', logout);
