@@ -35,24 +35,6 @@ Exercise.init(
       type: DataTypes.STRING(3500),
       allowNull: true,
     },
-    user_id: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      references: {
-        model: 'user',
-        key: 'id',
-        unique: false,
-      },
-    },
-    challenge_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'challenge',
-        key: 'id',
-        unique: false,
-      },
-    },
   },
   {
     sequelize,
