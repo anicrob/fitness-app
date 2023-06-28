@@ -2,8 +2,8 @@
 const signupFormHandler = async event => {
   event.preventDefault();
 
-  const username = document.querySelector('#username-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  const username = document.querySelector('#username').value.trim();
+  const password = document.querySelector('#password').value.trim();
 
   //create new user
   if (username && password) {
@@ -14,7 +14,7 @@ const signupFormHandler = async event => {
     });
 
     if (response.ok) {
-      document.location.replace('/dashboard');
+      document.location.replace('/');
     } else {
       alert(response.statusText);
     }
@@ -22,5 +22,5 @@ const signupFormHandler = async event => {
 };
 //event listener
 document
-  .querySelector('.signup-form')
+  .querySelector('#registration-form')
   .addEventListener('submit', signupFormHandler);

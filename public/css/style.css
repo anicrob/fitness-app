@@ -1,3 +1,9 @@
+/* our logo colors */
+:root {
+  --blue: #1f47f2;
+  --red: #e93f33;
+}
+
 body {
   background-color: #eeeeee;
 }
