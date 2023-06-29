@@ -5,6 +5,14 @@
   <form class="mt-4">
     <div class="field is-horizontal">
       <div class="field-body">
+        <style>
+  .search-section .field-body {
+    padding: .5rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 87rem;
+  }
+</style>
         <div class="field">
           <label for="difficulty" class="label">Difficulty</label>
           <div class="control">
@@ -72,19 +80,28 @@
 </div>
 
 <div id="exercise-list" class="rows is-multiline mt-6">
-  <div class="row">
+ {{!-- *temporary* --}}
+  <style>
+  .row {
+    padding: .5rem;
+    max-width: 87rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+
     {{#each exercises as |exercise|}}
       <div class="row is-one-third">
-        <div class="card mt-6">
+        <div class="card mt-8">
           <div class="card-content">
-            <p class="title is-4">{{name}}</p>
-            <p class="subtitle is-6 has-text-weight-bold">Exercise Type:</p>
+            <p class="title is-4 has-text-centered">{{name}}</p>
+            <p class="subtitle is-4 has-text-weight-bold">Exercise Type:</p>
             <p class="subtitle">{{exercise.type}}</p>
-            <p class="subtitle is-6 has-text-weight-bold">Muscle Group:</p>
+            <p class="subtitle is-4 has-text-weight-bold">Muscle Group:</p>
             <p class="subtitle">{{exercise.muscle}}</p>
-            <p class="subtitle is-6 has-text-weight-bold">Difficulty:</p>
+            <p class="subtitle is-4 has-text-weight-bold">Difficulty:</p>
             <p class="subtitle">{{exercise.difficulty}}</p>
-            <p class="subtitle is-6 has-text-weight-bold">Instructions:</p>
+            <p class="subtitle is-4 has-text-weight-bold">Instructions:</p>
             <p>{{exercise.instructions}}</p>
             <button class="button is-primary is-fullwidth mt-4" data-exercise-id="{{exercise.id}}">Add</button>
           </div>
