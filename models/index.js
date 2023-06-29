@@ -1,8 +1,8 @@
 const Challenge = require('./Challenge');
 const Exercise = require('./Exercise');
 const User = require('./User');
-const userExercise = require('./UserExercise');
-const exerciseChallenge = require('./ExerciseChallenge');
+const UserExercise = require('./UserExercise');
+const ExerciseChallenge = require('./ExerciseChallenge');
 
 // Challenge have many Exercises
 Challenge.belongsToMany(Exercise, {
@@ -43,9 +43,6 @@ module.exports = {
   Challenge,
   Exercise,
   User,
-  userExercise,
-  exerciseChallenge,
+  UserExercise,
+  ExerciseChallenge,
 };
-
-//challenge = post
-//exercise = comments

@@ -5,8 +5,8 @@ const {
   User,
   Exercise,
   Challenge,
-  userExercise,
-  exerciseChallenge,
+  UserExercise,
+  ExerciseChallenge,
 } = require('../../models');
 
 //render homepage and get all exercises w/ user data
@@ -30,25 +30,35 @@ router.get('/', isAuthenticated, async (req, res) => {
 });
 
 //render profile page and send challenge, user, and exercise data
-//CHANGE
 router.get('/profile', isAuthenticated, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
-      include: [{ model: Exercise, through: userExercise }],
+      include: [{ model: Exercise, through: UserExercise }],
+      attributes: {
+        exclude: ['password'],
+      },
     });
     const user = userData.get({ plain: true });
 
     const challengeData = await Challenge.findOne({
       where: {
-        user_id: req.session.user_id,
-        current: true,
+        // user_id: req.session.user_id,
+        // current: true,
+        id: 19,
       },
-      include: [{ model: Exercise, through: exerciseChallenge }],
+      include: [
+        {
+          model: Exercise,
+          through: ExerciseChallenge,
+        },
+      ],
     });
     const challenge = challengeData.get({ plain: true });
+    console.log('this is the user data>>>>>>>', user);
+    console.log('this is the challenge data>>>>>>>', challenge);
     res.render('profile', {
       user,
-      // challenge,
+      challenge,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

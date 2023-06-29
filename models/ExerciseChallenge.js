@@ -21,6 +21,9 @@ ExerciseChallenge.init(
         unique: false,
       },
     },
+    numExercises: {
+      type: DataTypes.INTEGER,
+    },
   },
   {
     sequelize,

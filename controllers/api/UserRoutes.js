@@ -1,19 +1,24 @@
 const router = require('express').Router();
-const { User, Exercise, Challenge } = require('../../models');
-const userExercise = require('../../models/UserExercise');
+const {
+  User,
+  Exercise,
+  Challenge,
+  UserExercise,
+  ExerciseChallenge,
+} = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
-      // include: [
-      //   {
-      //     model: Exercise,
-      //     through: userExercise,
-      //   },
-      // ],
+      include: [
+        {
+          model: Challenge,
+          include: [{ model: Exercise, through: ExerciseChallenge }],
+        },
+      ],
     });
-    const user = userData.get({ plain: true });
-    res.status(200).json(...user);
+    // const user = userData.get({ plain: true });
+    res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -21,16 +26,21 @@ router.get('/', async (req, res) => {
 //get user's info
 router.get('/info', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      include: [
-        {
-          model: Exercise,
-          through: userExercise,
+    const userData = await User.findByPk(
+      '28437cca-2238-40e1-9b73-27bc0f581a9e',
+      {
+        include: [
+          {
+            model: Exercise,
+            through: UserExercise,
+          },
+        ],
+        attributes: {
+          exclude: ['password'],
         },
-      ],
-    });
-    const user = userData.get({ plain: true });
-    res.status(200).json(...user);
+      }
+    );
+    res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -52,8 +62,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-//update user's details (EXERCISES)
-//CHANGE
+//update user's details
 router.put('/update', async (req, res) => {
   try {
     const updatedUser = await User.update(...req.body, {
@@ -63,7 +72,7 @@ router.put('/update', async (req, res) => {
     });
 
     if (!updatedUser) {
-      res.status(404).json({ message: 'No change was found' });
+      res.status(404).json({ message: 'No user was found' });
       return;
     }
 

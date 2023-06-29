@@ -23,7 +23,7 @@ Welcome {{user.username}}!
          <input id="user-BMI" value="{{user.BMI}}"></input>
 
     </p>
-    <button id="save-user-health-details">Save</button>
+    <button data-user-id="{{user.id}}" id="save-user-health-details">Save</button>
 </div>
 <div id="profile-stats-pannel">
     My Stats:
@@ -44,26 +44,38 @@ Welcome {{user.username}}!
 </div>
 <div id="current-challenge-pannel">
     Current Challenge:
-    <p>x<span id="random-num-1">3</span> Exercise 1</p>
-    <p>exercise details here</p>
-    <p>x<span id="random-num-2">50</span> Exercise 2</p>
-    <p>Xexercise details here</p>
-    <p>x<span id="random-num-3">20</span> Exercise 3</p>
-    <p>exercise details here</p>
-    <button id="btn-giveup">Give Up 😩</button>
-    <button id="btn-giveup">Completed 💪</button>
+    {{#if challenge.id}}
+    {{#each challenge.exercises as |exercise|}}
+    <p>x<span> {{exercise.exercisechallenge.numExercises}}</span> {{exercise.name}}</p>
+        <p>{{exercise.name}}</p>
+        <p>{{exercise.type}}</p>
+        <p>{{exercise.muscle}}</p>
+        <p>{{exercise.equipment}}</p>
+        <p>{{exercise.difficulty}}</p>
+        <p>{{exercise.instructions}}</p>
+    {{/each}}
+    <button data-challenge-id="challenge.id" id="btn-giveup">Give Up 😩</button>
+    <button data-challenge-id="challenge.id" id="btn-giveup">Completed 💪</button>
+    {{else}}
+    Generate a challenge to get started!
+    {{/if}}
 </div>
 <button>Generate Challenge! ⛰️</button>
 <div id="saved-exercises section">
     <h2>Saved Exercises</h2>
-    {{!-- {{#if user.exercise_id}} --}}
-    {{!-- {{#each user.exercise_id as |exercise|}} --}}
+    {{#if user.exercises}}
+    {{#each user.exercises as |exercise|}}
     <div class="saved-exercise-card">
-        <p>exercise details here</p>
+        <p>{{exercise.name}}</p>
+        <p>{{exercise.type}}</p>
+        <p>{{exercise.muscle}}</p>
+        <p>{{exercise.equipment}}</p>
+        <p>{{exercise.difficulty}}</p>
+        <p>{{exercise.instructions}}</p>
         <button data-exercise-id="{{exercise.id}}" class="remove-exerciseBtn">X</button>
     </div>
-    {{!-- {{/each}} --}}
-    {{!-- {{else}}
+    {{/each}}
+    {{else}}
     Save an exercise today!
-    {{/if}} --}}
+    {{/if}}
 </div>
