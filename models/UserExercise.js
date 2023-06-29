@@ -6,7 +6,7 @@ class UserExercise extends Model {}
 UserExercise.init(
   {
     user_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       references: {
         model: 'user',
         key: 'id',
