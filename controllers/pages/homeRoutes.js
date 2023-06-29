@@ -1,7 +1,13 @@
 // routes/pages/pageRoutes.js
 const router = require('express').Router();
 const isAuthenticated = require('../../middleware/isAuthenticated');
-const { User, Exercise, Challenge } = require('../../models');
+const {
+  User,
+  Exercise,
+  Challenge,
+  userExercise,
+  exerciseChallenge,
+} = require('../../models');
 
 //render homepage and get all exercises w/ user data
 router.get('/', isAuthenticated, async (req, res) => {
@@ -24,43 +30,25 @@ router.get('/', isAuthenticated, async (req, res) => {
 });
 
 //render profile page and send challenge, user, and exercise data
+//CHANGE
 router.get('/profile', isAuthenticated, async (req, res) => {
   try {
-    // a way to make this conditional?
-    // const challengeData = await Challenge.findOne({
-    //   where: {
-    //     user_id: req.session.logged_in,
-    //     current: true,
-    //   },
-    //   include: [
-    //     {
-    //       model: Exercise,
-    //     },
-    //   ],
-    // });
-
-    // const challenge = challengeData.get({ plain: true });
-
-    const userData = await User.findByPk(
-      req.session.user_id,
-      {
-        attributes: { exclude: ['password'] },
-      },
-      {
-        include: [
-          {
-            model: Exercise,
-          },
-        ],
-      }
-    );
-
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [{ model: Exercise, through: userExercise }],
+    });
     const user = userData.get({ plain: true });
 
-    console.log('challenge & user + exercise data>>>', user);
+    const challengeData = await Challenge.findOne({
+      where: {
+        user_id: req.session.user_id,
+        current: true,
+      },
+      include: [{ model: Exercise, through: exerciseChallenge }],
+    });
+    const challenge = challengeData.get({ plain: true });
     res.render('profile', {
-      //   challenge,
       user,
+      // challenge,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -68,7 +56,7 @@ router.get('/profile', isAuthenticated, async (req, res) => {
   }
 });
 
-//if not logged in, send to login page, or if already logged in, send to '/dashboard' route
+//if not logged in, send to login page, or if already logged in, send to '/' route
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {

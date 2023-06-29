@@ -1,6 +1,23 @@
 const router = require('express').Router();
 const { User, Exercise, Challenge } = require('../../models');
+const userExercise = require('../../models/UserExercise');
 
+router.get('/', async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      // include: [
+      //   {
+      //     model: Exercise,
+      //     through: userExercise,
+      //   },
+      // ],
+    });
+    const user = userData.get({ plain: true });
+    res.status(200).json(...user);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 //get user's info
 router.get('/info', async (req, res) => {
   try {
@@ -8,6 +25,7 @@ router.get('/info', async (req, res) => {
       include: [
         {
           model: Exercise,
+          through: userExercise,
         },
       ],
     });
@@ -35,7 +53,8 @@ router.post('/', async (req, res) => {
 });
 
 //update user's details (EXERCISES)
-router.put('update', async (req, res) => {
+//CHANGE
+router.put('/update', async (req, res) => {
   try {
     const updatedUser = await User.update(...req.body, {
       where: {
