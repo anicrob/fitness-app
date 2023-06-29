@@ -60,7 +60,10 @@ Welcome {{user.username}}!
     Generate a challenge to get started!
     {{/if}}
 </div>
+{{#if challenge.id}}
+{{else}}
 <button>Generate Challenge! ⛰️</button>
+{{/if}}
 <div id="saved-exercises section">
     <h2>Saved Exercises</h2>
     {{#if user.exercises}}

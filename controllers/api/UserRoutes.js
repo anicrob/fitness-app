@@ -7,39 +7,21 @@ const {
   ExerciseChallenge,
 } = require('../../models');
 
+//get user's info
 router.get('/', async (req, res) => {
   try {
-    const userData = await User.findAll({
+    const userData = await User.findByPk(req.session.user_id, {
       include: [
         {
-          model: Challenge,
-          include: [{ model: Exercise, through: ExerciseChallenge }],
+          model: Exercise,
+          through: UserExercise,
         },
+        { model: Challenge },
       ],
+      attributes: {
+        exclude: ['password'],
+      },
     });
-    // const user = userData.get({ plain: true });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-//get user's info
-router.get('/info', async (req, res) => {
-  try {
-    const userData = await User.findByPk(
-      '28437cca-2238-40e1-9b73-27bc0f581a9e',
-      {
-        include: [
-          {
-            model: Exercise,
-            through: UserExercise,
-          },
-        ],
-        attributes: {
-          exclude: ['password'],
-        },
-      }
-    );
     res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);

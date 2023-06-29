@@ -32,16 +32,13 @@ router.get('/', async (req, res) => {
 
 router.get('/ec', async (req, res) => {
   try {
-    // Get all exercises and JOIN with user data
     const ExerciseChallengeData = await ExerciseChallenge.findAll();
-    // Serialize data so the template can read it
-    console.log('sending exercises>>>>>', ExerciseChallengeData);
-    // Pass serialized data and session flag into template
     res.json(ExerciseChallengeData);
   } catch (err) {
     res.json(err);
   }
 });
+
 //create a new challenge
 router.post('/', async (req, res) => {
   try {
@@ -49,13 +46,13 @@ router.post('/', async (req, res) => {
     const newChallenge = await Challenge.create({
       current: 1,
       completed: 0,
-      user_id: req.body.user_id,
+      user_id: req.session.user_id,
     });
 
     //get user's challenges
     const userExercises = await UserExercise.findAll({
       where: {
-        user_id: req.body.user_id,
+        user_id: req.session.user_id,
       },
       //exlude the user_id as we just want the exercise_id property
       attributes: {
@@ -117,11 +114,11 @@ router.post('/', async (req, res) => {
 });
 
 //update challenge
-router.put('/finish', withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const updatedChallenge = await Challenge.update(...req.body, {
       where: {
-        id: req.body.id,
+        id: req.params.id,
       },
     });
 

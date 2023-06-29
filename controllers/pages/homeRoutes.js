@@ -42,9 +42,8 @@ router.get('/profile', isAuthenticated, async (req, res) => {
 
     const challengeData = await Challenge.findOne({
       where: {
-        // user_id: req.session.user_id,
-        // current: true,
-        id: 19,
+        user_id: req.session.user_id,
+        current: true,
       },
       include: [
         {
