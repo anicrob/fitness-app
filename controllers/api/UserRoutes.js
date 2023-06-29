@@ -1,18 +1,28 @@
 const router = require('express').Router();
-const { User, Exercise, Challenge } = require('../../models');
+const {
+  User,
+  Exercise,
+  Challenge,
+  UserExercise,
+  ExerciseChallenge,
+} = require('../../models');
 
 //get user's info
-router.get('/info', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       include: [
         {
           model: Exercise,
+          through: UserExercise,
         },
+        { model: Challenge },
       ],
+      attributes: {
+        exclude: ['password'],
+      },
     });
-    const user = userData.get({ plain: true });
-    res.status(200).json(...user);
+    res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -34,8 +44,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-//update user's details (EXERCISES)
-router.put('update', async (req, res) => {
+//update user's details
+router.put('/update', async (req, res) => {
   try {
     const updatedUser = await User.update(...req.body, {
       where: {
@@ -44,7 +54,7 @@ router.put('update', async (req, res) => {
     });
 
     if (!updatedUser) {
-      res.status(404).json({ message: 'No change was found' });
+      res.status(404).json({ message: 'No user was found' });
       return;
     }
 
