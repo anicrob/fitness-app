@@ -13,6 +13,7 @@ Challenge.init(
     },
     user_id: {
       type: DataTypes.UUID,
+      allowNull: true,
       references: {
         model: 'user',
         key: 'id',
@@ -24,15 +25,6 @@ Challenge.init(
     completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    },
-    exercise_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'exercise',
-        key: 'id',
-        unique: false,
-      },
     },
   },
   {
