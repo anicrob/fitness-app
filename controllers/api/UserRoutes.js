@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelize = require('../../db/config');
 const {
   User,
   Exercise,
@@ -10,21 +11,18 @@ const {
 //get user's info
 router.get('/', async (req, res) => {
   try {
-    const userData = await User.findByPk(
-      'd7c74ef4-dcaf-412f-b420-b9f6f871fcd7',
-      {
-        include: [
-          {
-            model: Exercise,
-            through: UserExercise,
-          },
-          { model: Challenge },
-        ],
-        attributes: {
-          exclude: ['password'],
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [
+        {
+          model: Exercise,
+          through: UserExercise,
         },
-      }
-    );
+        { model: Challenge },
+      ],
+      attributes: {
+        exclude: ['password'],
+      },
+    });
     res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);
@@ -47,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-//update user's details
+//update user's details - for age, height and BMI only!
 router.put('/update', async (req, res) => {
   try {
     const updatedUser = await User.update(...req.body, {
@@ -64,6 +62,82 @@ router.put('/update', async (req, res) => {
     res.status(200).json(updatedUser);
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+//update numSaved exercises
+router.put('/numSavedExercises', async (req, res) => {
+  try {
+    const savedExercises = await UserExercise.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      attributes: {
+        exclude: ['user_id'],
+      },
+    });
+    const numSavedExercises = savedExercises.length;
+    if (numSavedExercises > 0) {
+      try {
+        const updatedUser = await User.update(
+          { numSavedExercises },
+          {
+            where: {
+              id: req.session.user_id,
+            },
+          }
+        );
+
+        if (!updatedUser) {
+          res.status(404).json({ message: 'No user was found' });
+          return;
+        }
+
+        res.status(200).json(updatedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else return;
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//update numCompletedChallenges
+router.put('/numCompletedChallenges', async (req, res) => {
+  try {
+    const completedChallenges = await Challenge.findAll({
+      where: {
+        user_id: req.session.user_id,
+        completed: true,
+      },
+      attributes: {
+        include: ['challenge_id'],
+      },
+    });
+    const numCompletedChallenges = completedChallenges.length;
+    if (numCompletedChallenges > 0) {
+      try {
+        const updatedUser = await User.update(
+          { numCompletedChallenges },
+          {
+            where: {
+              id: req.session.user_id,
+            },
+          }
+        );
+
+        if (!updatedUser) {
+          res.status(404).json({ message: 'No user was found' });
+          return;
+        }
+
+        res.status(200).json(updatedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else return;
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
