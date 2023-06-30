@@ -14,7 +14,18 @@ body {
 }
 
 .nav-btn {
-  background: none !important;
+  /* display: flex;
+  justify-content: space-between;
+  background-color: #1f47f2;
+  cursor: pointer; */
+  background-color: #1f47f2;
   border: none;
-  cursor: pointer;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px;
 }
