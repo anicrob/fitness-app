@@ -75,7 +75,7 @@ router.post('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//remove exercise from user's account
 router.delete('/:id', async (req, res) => {
   try {
     const deleteRecord = await UserExercise.findOne({
