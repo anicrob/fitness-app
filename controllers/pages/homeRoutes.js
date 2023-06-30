@@ -62,12 +62,11 @@ router.get('/profile', isAuthenticated, async (req, res) => {
       });
       return;
     }
-    // const challenge = challengeData.get({ plain: true });
     console.log('this is the user data>>>>>>>', user);
-    console.log('this is the challenge data>>>>>>>', challenge);
+    console.log('this is the challenge data>>>>>>>', challengeData);
     res.render('profile', {
       user,
-      challenge,
+      challengeData,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

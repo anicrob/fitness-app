@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 //get exercise info by filter:
-// http://localhost:3001/api/exercises/filter?difficulty=intermediate&muscle=abdominals
+// example: http://localhost:3001/api/exercises/filter?difficulty=intermediate&muscle=abdominals&type=strength
 router.get('/filter', async (req, res) => {
   const query = {};
   if (req.query.difficulty) {
@@ -33,8 +33,7 @@ router.get('/filter', async (req, res) => {
   try {
     const exerciseData = await Exercise.findAll({ where: query });
 
-    const exercises = exerciseData.get({ plain: true });
-    res.status(200).json(exercises);
+    res.status(200).json(exerciseData);
   } catch (err) {
     res.status(400).json(err);
   }
