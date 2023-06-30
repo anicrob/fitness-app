@@ -10,18 +10,21 @@ const {
 //get user's info
 router.get('/', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      include: [
-        {
-          model: Exercise,
-          through: UserExercise,
+    const userData = await User.findByPk(
+      'd7c74ef4-dcaf-412f-b420-b9f6f871fcd7',
+      {
+        include: [
+          {
+            model: Exercise,
+            through: UserExercise,
+          },
+          { model: Challenge },
+        ],
+        attributes: {
+          exclude: ['password'],
         },
-        { model: Challenge },
-      ],
-      attributes: {
-        exclude: ['password'],
-      },
-    });
+      }
+    );
     res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);
@@ -31,7 +34,7 @@ router.get('/', async (req, res) => {
 //create a new user
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const userData = await User.create();
 
     req.session.save(() => {
       req.session.user_id = userData.id;

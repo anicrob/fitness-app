@@ -1,84 +1,83 @@
-<h1 class="text-center mt-5">My Dashboard</h1>
-<div id="username-welcome">
-Welcome {{user.username}}!
+<h1 class="title has-text-centered mt-5">My Dashboard</h1>
+<div id="username-welcome" class="has-text-centered">
+  Welcome {{user.username}}!
 </div>
-<div id="user-info-pannel">
-    My Health Details:
-    <p>
-        age:
-        <input id="user-age" value="{{user.age}}"></input>
-    </p>
-    <p>
-        height:
-        <input id="user-height" value="{{user.height}}"></input>
-
-    </p>
-    <p>
-        weight:
-        <input id="user-weight" value="{{user.weight}}"></input>
-
-    </p>
-    <p>
-        BMI: 
-         <input id="user-BMI" value="{{user.BMI}}"></input>
-
-    </p>
-    <button data-user-id="{{user.id}}" id="save-user-health-details">Save</button>
+<div id="user-info-pannel" class="box mt-5" style="width: 25%;">
+  My Health Details:
+  <p>
+    age:
+    <input id="user-age" class="input" value="{{user.age}}">
+  </p>
+  <p>
+    height:
+    <input id="user-height" class="input" value="{{user.height}}">
+  </p>
+  <p>
+    weight:
+    <input id="user-weight" class="input" value="{{user.weight}}">
+  </p>
+  <p>
+    BMI:
+    <input id="user-BMI" class="input" value="{{user.BMI}}">
+  </p>
+  <button data-user-id="{{user.id}}" id="save-user-health-details" class="button is-primary">Save</button>
 </div>
-<div id="profile-stats-pannel">
-    My Stats:
-    <p>Number of currently saved exercises:
-        {{#if user.numSavedExercises}}
-        {{user.numSavedExercises}}
-        {{else}}
-        Start today by going to the homepage and saving a challenge!
-        {{/if}}
-    </p>
-    <p>Number of completed challenges: 
-        {{#if user.numCompletedChallenges}}
-        {{user.numCompletedChallenges}}
-        {{else}}
-        Complete a challenge today!
-        {{/if}}
-    </p>
-</div>
-<div id="current-challenge-pannel">
-    Current Challenge:
-    {{#if challenge.id}}
-    {{#each challenge.exercises as |exercise|}}
-    <p>x<span> {{exercise.exercisechallenge.numExercises}}</span> {{exercise.name}}</p>
-        <p>{{exercise.name}}</p>
-        <p>{{exercise.type}}</p>
-        <p>{{exercise.muscle}}</p>
-        <p>{{exercise.equipment}}</p>
-        <p>{{exercise.difficulty}}</p>
-        <p>{{exercise.instructions}}</p>
-    {{/each}}
-    <button data-challenge-id="challenge.id" id="btn-giveup">Give Up 😩</button>
-    <button data-challenge-id="challenge.id" id="btn-giveup">Completed 💪</button>
+<div id="profile-stats-pannel" class="box mt-5">
+  My Stats:
+  <p>Number of currently saved exercises:
+    {{#if user.numSavedExercises}}
+    {{user.numSavedExercises}}
     {{else}}
-    Generate a challenge to get started!
+    Start today by going to the homepage and saving a challenge!
     {{/if}}
+  </p>
+  <p>Number of completed challenges:
+    {{#if user.numCompletedChallenges}}
+    {{user.numCompletedChallenges}}
+    {{else}}
+    Complete a challenge today!
+    {{/if}}
+  </p>
+</div>
+<div id="current-challenge-pannel" class="box mt-5">
+  Current Challenge:
+  {{#if challenge.id}}
+  {{#each challenge.exercises as |exercise|}}
+  <div class="exercise-card">
+    <p>x<span>{{exercise.exercisechallenge.numExercises}}</span> {{exercise.name}}</p>
+    <p>{{exercise.name}}</p>
+    <p>{{exercise.type}}</p>
+    <p>{{exercise.muscle}}</p>
+    <p>{{exercise.equipment}}</p>
+    <p>{{exercise.difficulty}}</p>
+    <p>{{exercise.instructions}}</p>
+  </div>
+  {{/each}}
+  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-danger">Give Up :weary:</button>
+  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-success">Completed :muscle:</button>
+  {{else}}
+  Generate a challenge to get started!
+  {{/if}}
 </div>
 {{#if challenge.id}}
 {{else}}
-<button>Generate Challenge! ⛰️</button>
+<button class="button is-primary">Generate Challenge! :mountain:</button>
 {{/if}}
-<div id="saved-exercises section">
-    <h2>Saved Exercises</h2>
-    {{#if user.exercises}}
-    {{#each user.exercises as |exercise|}}
-    <div class="saved-exercise-card">
-        <p>{{exercise.name}}</p>
-        <p>{{exercise.type}}</p>
-        <p>{{exercise.muscle}}</p>
-        <p>{{exercise.equipment}}</p>
-        <p>{{exercise.difficulty}}</p>
-        <p>{{exercise.instructions}}</p>
-        <button data-exercise-id="{{exercise.id}}" class="remove-exerciseBtn">X</button>
-    </div>
-    {{/each}}
-    {{else}}
-    Save an exercise today!
-    {{/if}}
+<div id="saved-exercises" class="section box mt-5">
+  <h2>Saved Exercises</h2>
+  {{#if user.exercises}}
+  {{#each user.exercises as |exercise|}}
+  <div class="saved-exercise-card">
+    <p>{{exercise.name}}</p>
+    <p>{{exercise.type}}</p>
+    <p>{{exercise.muscle}}</p>
+    <p>{{exercise.equipment}}</p>
+    <p>{{exercise.difficulty}}</p>
+    <p>{{exercise.instructions}}</p>
+    <button data-exercise-id="{{exercise.id}}" class="remove-exerciseBtn button is-danger">X</button>
+  </div>
+  {{/each}}
+  {{else}}
+  Save an exercise today!
+  {{/if}}
 </div>

@@ -65,13 +65,14 @@ router.post('/:id', async (req, res) => {
     where: {
       exercise_id: req.params.id,
       //change back to req.session.user_id once done testing
-      user_id: '28437cca-2238-40e1-9b73-27bc0f581a9e',
+      user_id: req.session.user_id,
     },
     attributes: {
       exclude: ['user_id'],
     },
   });
-  //alreadyAdded is an array, so to see if it's empty, check the length
+  console.log(alreadyAddedExercise);
+  // alreadyAdded is an array, so to see if it's empty, check the length
   if (alreadyAddedExercise.length < 0) {
     res.status(400).json({ message: 'You have already added this exercise!' });
     return;
@@ -80,7 +81,7 @@ router.post('/:id', async (req, res) => {
       const userExercise = await UserExercise.create({
         exercise_id: req.params.id,
         //change back to req.session.user_id once done testing
-        user_id: '28437cca-2238-40e1-9b73-27bc0f581a9e',
+        user_id: req.session.user_id,
       });
       res.status(200).json(userExercise);
     } catch (err) {
