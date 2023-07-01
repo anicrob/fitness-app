@@ -46,11 +46,11 @@ router.post('/', async (req, res) => {
 });
 
 //update user's details - for age, height and BMI only!
-router.put('/update', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   try {
-    const updatedUser = await User.update(...req.body, {
+    const updatedUser = await User.update(req.body, {
       where: {
-        id: req.session.user_id,
+        id: req.params.id,
       },
     });
 

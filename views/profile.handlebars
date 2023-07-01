@@ -21,6 +21,7 @@
     <input id="user-BMI" class="input" value="{{user.BMI}}">
   </p>
   <button data-user-id="{{user.id}}" id="save-user-health-details" class="button is-primary">Save</button>
+  <div id="result-container"></div>
 </div>
 <div id="profile-stats-pannel" class="box mt-5">
   My Stats:
@@ -81,6 +82,7 @@
   Save an exercise today!
   {{/if}}
 </div>
+<script src="/js/saveUserData.js"></script>
 <script src="/js/removeSavedExercise.js"></script>
 {{#if challenge.id}}
 <script src="/js/gcChallenge.js"></script>
