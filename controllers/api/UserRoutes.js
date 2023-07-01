@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelize = require('../../db/config');
 const {
   User,
   Exercise,
@@ -31,7 +32,7 @@ router.get('/', async (req, res) => {
 //create a new user
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const userData = await User.create();
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -44,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-//update user's details
+//update user's details - for age, height and BMI only!
 router.put('/update', async (req, res) => {
   try {
     const updatedUser = await User.update(...req.body, {
@@ -61,6 +62,109 @@ router.put('/update', async (req, res) => {
     res.status(200).json(updatedUser);
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+//update numSaved exercises
+router.put('/numSavedExercises', async (req, res) => {
+  //find all of the exercises the user has saved
+  try {
+    const savedExercises = await UserExercise.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      attributes: {
+        exclude: ['user_id'],
+      },
+    });
+
+    //get the numSavedExercises from length of the savedExercises array
+    const numSavedExercises = savedExercises.length;
+
+    //if they have saved exercises, update the user's profile w/ the number of saved exercises
+    if (numSavedExercises > 0) {
+      try {
+        const updatedUser = await User.update(
+          { numSavedExercises },
+          {
+            where: {
+              id: req.session.user_id,
+            },
+          }
+        );
+
+        if (!updatedUser) {
+          res.status(404).json({ message: 'No user was found' });
+          return;
+        }
+
+        res.status(200).json(updatedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      //if they don't have saved exercises, update the user's profile w/ numSavedExercises = null,
+      //so the handlebars if function will show message for user to save an exercise
+      try {
+        const updatedUser = await User.update(
+          { numSavedExercises: null },
+          {
+            where: {
+              id: req.session.user_id,
+            },
+          }
+        );
+
+        if (!updatedUser) {
+          res.status(404).json({ message: 'No user was found' });
+          return;
+        }
+
+        res.status(200).json(updatedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//update numCompletedChallenges
+router.put('/numCompletedChallenges', async (req, res) => {
+  try {
+    const completedChallenges = await Challenge.findAll({
+      where: {
+        user_id: req.session.user_id,
+        completed: true,
+      },
+      attributes: {
+        include: ['challenge_id'],
+      },
+    });
+    const numCompletedChallenges = completedChallenges.length;
+    if (numCompletedChallenges > 0) {
+      try {
+        const updatedUser = await User.update(
+          { numCompletedChallenges },
+          {
+            where: {
+              id: req.session.user_id,
+            },
+          }
+        );
+
+        if (!updatedUser) {
+          res.status(404).json({ message: 'No user was found' });
+          return;
+        }
+
+        res.status(200).json(updatedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else return;
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
