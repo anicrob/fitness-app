@@ -66,6 +66,7 @@ router.put('/update', async (req, res) => {
 });
 //update numSaved exercises
 router.put('/numSavedExercises', async (req, res) => {
+  //find all of the exercises the user has saved
   try {
     const savedExercises = await UserExercise.findAll({
       where: {
@@ -75,7 +76,11 @@ router.put('/numSavedExercises', async (req, res) => {
         exclude: ['user_id'],
       },
     });
+
+    //get the numSavedExercises from length of the savedExercises array
     const numSavedExercises = savedExercises.length;
+
+    //if they have saved exercises, update the user's profile w/ the number of saved exercises
     if (numSavedExercises > 0) {
       try {
         const updatedUser = await User.update(
@@ -96,7 +101,29 @@ router.put('/numSavedExercises', async (req, res) => {
       } catch (err) {
         res.status(500).json(err);
       }
-    } else return;
+    } else {
+      //if they don't have saved exercises, update the user's profile w/ numSavedExercises = null,
+      //so the handlebars if function will show message for user to save an exercise
+      try {
+        const updatedUser = await User.update(
+          { numSavedExercises: null },
+          {
+            where: {
+              id: req.session.user_id,
+            },
+          }
+        );
+
+        if (!updatedUser) {
+          res.status(404).json({ message: 'No user was found' });
+          return;
+        }
+
+        res.status(200).json(updatedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    }
   } catch (err) {
     res.status(500).json(err);
   }

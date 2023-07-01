@@ -44,7 +44,7 @@
   {{#if challenge.id}}
   {{#each challenge.exercises as |exercise|}}
   <div class="exercise-card">
-    <p>x<span>{{exercise.exercisechallenge.numExercises}}</span> {{exercise.name}}</p>
+    <p>✘<span>{{exercise.exercisechallenge.numExercises}}</span> {{exercise.name}}</p>
     <p>{{exercise.name}}</p>
     <p>{{exercise.type}}</p>
     <p>{{exercise.muscle}}</p>
@@ -53,15 +53,15 @@
     <p>{{exercise.instructions}}</p>
   </div>
   {{/each}}
-  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-danger">Give Up :weary:</button>
-  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-success">Completed :muscle:</button>
+  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-danger">Give Up 😩</button>
+  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-success">Completed 💪</button>
   {{else}}
   Generate a challenge to get started!
   {{/if}}
 </div>
 {{#if challenge.id}}
 {{else}}
-<button class="button is-primary">Generate Challenge! :mountain:</button>
+<button id = "generate-challenge-btn" class="button is-primary">Generate Challenge! ⛰️</button>
 {{/if}}
 <div id="saved-exercises" class="section box mt-5">
   <h2>Saved Exercises</h2>
@@ -81,3 +81,9 @@
   Save an exercise today!
   {{/if}}
 </div>
+<script src="/js/removeSavedExercise.js"></script>
+{{#if challenge.id}}
+<script src="/js/gcChallenge.js"></script>
+{{else}}
+<script src="/js/generateChallenge.js"></script>
+{{/if}}
