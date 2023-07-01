@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +15,6 @@
   <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 
-
-
 <body>
   <nav class="navbar navbar-expand-lg bg-light bg-light p-2">
     {{#if logged_in}}
@@ -33,10 +28,10 @@
     {{#if logged_in}}
     <ul class="navbar-nav ms-auto">
       <li class="nav-item active ms-auto">
-        <a class="nav-link" href="/">Home</span></a>
+        <a class="nav-link nav-btn" href="/">Home</span></a>
       </li>
             <li class="nav-item active ms-auto">
-        <a class="nav-link" href="/profile">Profile</span></a>
+        <a class="nav-link nav-btn" href="/profile">Profile</span></a>
       </li>
       <li class="nav-item ms-auto">
         <button id="logout" class="nav-link nav-btn">Logout</button>
@@ -45,10 +40,10 @@
     {{ else}}
     <ul class="navbar-nav ms-auto">
       <li class="nav-item active ms-auto">
-        <a class="nav-link" href="/login">Login</span></a>
+        <a class="nav-link nav-btn" href="/login">Login</span></a>
       </li>
       <li class="nav-item ms-auto">
-        <a class="nav-link" href="/register">Signup</span></a>
+        <a class="nav-link nav-btn" href="/register">Signup</span></a>
       </li>
     </ul>
     {{/if}}
@@ -59,5 +54,4 @@
   {{/if}}
 
 </body>
-
 </html>

@@ -1,7 +1,7 @@
 const generateRandomExercises = async exercises => {
   //declare variable to hold 3 random exercises
   const randomExercises = [];
-  for (var i = 0; i < exercises.length; i++) {
+  for (var i = 0; i < 3; i++) {
     // get random index value
     const randomIndex = Math.floor(Math.random() * exercises.length);
 
@@ -28,7 +28,16 @@ const generateRandomNumbers = async () => {
   return randomNums;
 };
 
+const removeUnderscore = async string => {
+  if (string.includes('_')) {
+    const words = await string.split('_');
+    const wordsWithSpaces = await words.join(' ');
+    return wordsWithSpaces;
+  }
+};
+
 module.exports = {
   generateRandomExercises,
   generateRandomNumbers,
+  removeUnderscore,
 };

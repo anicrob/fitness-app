@@ -52,6 +52,16 @@ router.get('/profile', isAuthenticated, async (req, res) => {
         },
       ],
     });
+    if (!challengeData) {
+      // No challenge found
+      console.log('No challenge found for the user');
+      res.render('profile', {
+        user,
+        challenge: null,
+        logged_in: req.session.logged_in,
+      });
+      return;
+    }
     const challenge = challengeData.get({ plain: true });
     console.log('this is the user data>>>>>>>', user);
     console.log('this is the challenge data>>>>>>>', challenge);

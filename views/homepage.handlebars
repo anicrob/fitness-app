@@ -103,7 +103,7 @@
             <p class="subtitle">{{exercise.difficulty}}</p>
             <p class="subtitle is-4 has-text-weight-bold">Instructions:</p>
             <p>{{exercise.instructions}}</p>
-            <button class="button is-primary is-fullwidth mt-4" data-exercise-id="{{exercise.id}}">Add</button>
+            <button class="button add-exercise-button is-primary is-fullwidth mt-4" onclick="addExercise({{exercise.id}})" data-exercise-id="{{exercise.id}}">Add</button>
           </div>
         </div>
       </div>

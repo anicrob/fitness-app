@@ -1,22 +1,24 @@
-//event listener for the add button on exercises
-//pull the exercise id attribute from the button
-//GET user request -> save the current exercise_id values in an array
-//push the new id into the array
-//how to deal with duplicates? if(array.contains(newId))? then push into array?
-//PUT user request -> body of request with the exercise_id:(values of all exercises array/variable)
-//figure out how to get a count of items in that array
-//PUT request to user to have the numSavedExercises updated
-const addExercise = async ({ exerciseName }) => {
-  const response = await fetch('/api/exercise', {
+const addExerciseBtn = document.getElementsByClassName('.add-exercise-button');
+const addExercise = async id => {
+  const response = await fetch(`/api/exercises/${id}`, {
     method: 'POST',
-    body: JSON.stringify({ exerciseName }),
     headers: { 'Content-Type': 'application/json' },
   });
 
   if (response.ok) {
+    // document.location.replace('/');
   } else {
-    const { message } = await response.json();
-    // eslint-disable-next-line no-undef
-    showAlert({ target: 'login-alert', message, type: 'danger' });
+    alert('This exercise has already been added!');
+    return;
+  }
+  const updateProfile = await fetch('/api/users/numSavedExercises', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (updateProfile.ok) {
+    //document.location.replace('/');
+  } else {
+    alert(response.statusText);
   }
 };
