@@ -53,8 +53,8 @@
     <p>{{exercise.instructions}}</p>
   </div>
   {{/each}}
-  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-danger">Give Up 😩</button>
-  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-success">Completed 💪</button>
+  <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button is-danger" onclick=" giveUpChallenge({{challenge.id}})">Give Up 😩</button>
+  <button data-challenge-id="{{challenge.id}}" id="btn-complete" class="button is-success" onclick "completeChallenge({{challenge.id}})">Completed 💪</button>
   {{else}}
   Generate a challenge to get started!
   {{/if}}
