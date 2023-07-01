@@ -18,46 +18,41 @@
   <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 
-
-
 <body>
-  <nav class="navbar navbar-expand-lg bg-light bg-light p-2">
+ <nav class="navbar is-light p-4" role="navigation" aria-label="main navigation" style="background-image: url('https://as1.ftcdn.net/v2/jpg/01/37/09/68/1000_F_137096851_J0FiTeyNkq4v0PRdd3DG35YWYCeqyys8.jpg ">
+  <div class="container">
     {{#if logged_in}}
-  <a class="navbar-brand" href="/"><img class="logo-sm img-fluid" class="img-fluid" alt="Responsive image" src="/images/challenge-fitness-logo.jpeg" alt="logo"></a>
-  {{/if}}
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    {{#if logged_in}}
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item active ms-auto">
-        <a class="nav-link" href="/">Home</span></a>
-      </li>
-            <li class="nav-item active ms-auto">
-        <a class="nav-link" href="/profile">Profile</span></a>
-      </li>
-      <li class="nav-item ms-auto">
-        <button id="logout" class="nav-link nav-btn">Logout</button>
-      </li>
-    </ul>
-    {{ else}}
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item active ms-auto">
-        <a class="nav-link" href="/login">Login</span></a>
-      </li>
-      <li class="nav-item ms-auto">
-        <a class="nav-link" href="/register">Signup</span></a>
-      </li>
-    </ul>
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img class="logo-img" src="/images/challenge-fitness-logo.jpeg" alt="logo" style="max-height: 60px;">
+        </a>
+      </div>
     {{/if}}
+    <button class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarNavAltMarkup">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <div class="navbar-menu">
+      {{#if logged_in}}
+        <div class="navbar-end">
+          <a class="navbar-item is-uppercase has-text-weight-semibold" href="/">Home</a>
+          <a class="navbar-item is-uppercase has-text-weight-semibold" href="/profile">Profile</a>
+          <a id="logout" class="navbar-item is-uppercase has-text-weight-semibold is-danger">Logout</a>
+        </div>
+      {{ else}}
+        <div class="navbar-end">
+          <a class="navbar-item is-uppercase has-text-weight-semibold" href="/login">Login</a>
+          <a class="navbar-item is-uppercase has-text-weight-semibold" href="/register">Signup</a>
+        </div>
+      {{/if}}
+    </div>
+  </div>
 </nav>
   {{{ body }}}
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-
 </body>
 
 </html>
