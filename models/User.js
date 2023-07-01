@@ -36,6 +36,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    weight: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     BMI: {
       type: DataTypes.INTEGER,
       allowNull: true,
