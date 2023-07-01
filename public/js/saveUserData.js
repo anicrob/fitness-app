@@ -31,6 +31,7 @@ const updateUserProfile = async () => {
 
     if (response.ok) {
       displayMessage('Your profile has been successfully updated');
+      document.location.replace('/profile');
     } else {
       const { message } = await response.json();
       displayMessage(`Failed to update profile: ${message}`);

@@ -138,7 +138,7 @@ router.put('/numCompletedChallenges', async (req, res) => {
         completed: true,
       },
       attributes: {
-        include: ['challenge_id'],
+        include: ['id'],
       },
     });
     const numCompletedChallenges = completedChallenges.length;
