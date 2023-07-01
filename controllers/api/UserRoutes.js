@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-//update user's details - for age, height and BMI only!
+//update user's details - for age, height, weight, and BMI only!
 router.put('/update/:id', async (req, res) => {
   try {
     const updatedUser = await User.update(req.body, {
@@ -138,7 +138,7 @@ router.put('/numCompletedChallenges', async (req, res) => {
         completed: true,
       },
       attributes: {
-        include: ['challenge_id'],
+        include: ['id'],
       },
     });
     const numCompletedChallenges = completedChallenges.length;

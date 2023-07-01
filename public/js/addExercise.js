@@ -6,7 +6,6 @@ const addExercise = async id => {
   });
 
   if (response.ok) {
-    // document.location.replace('/');
   } else {
     alert('This exercise has already been added!');
     return;
@@ -17,7 +16,6 @@ const addExercise = async id => {
   });
 
   if (updateProfile.ok) {
-    //document.location.replace('/');
   } else {
     alert(response.statusText);
   }

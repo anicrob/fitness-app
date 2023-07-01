@@ -2,7 +2,7 @@
 const updateUserProfile = async () => {
   const age = document.getElementById('user-age').value.trim();
   const height = document.getElementById('user-height').value.trim();
-  // const weight = document.getElementById('user-weight').value.trim();
+  const weight = document.getElementById('user-weight').value.trim();
   const BMI = document.getElementById('user-BMI').value.trim();
   const userId = document.querySelector('#save-user-health-details').dataset
     .userId;
@@ -10,7 +10,7 @@ const updateUserProfile = async () => {
   const userData = {
     age,
     height,
-    // weight,
+    weight,
     BMI,
   };
 
@@ -31,6 +31,7 @@ const updateUserProfile = async () => {
 
     if (response.ok) {
       displayMessage('Your profile has been successfully updated');
+      document.location.replace('/profile');
     } else {
       const { message } = await response.json();
       displayMessage(`Failed to update profile: ${message}`);
