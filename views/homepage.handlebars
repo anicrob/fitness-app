@@ -1,18 +1,11 @@
 {{!-- homepage.handlebars --}}
-<h1 class="title is-1 has-text-centered mt-5">Exercise Homepage</h1>
-
+<div class="box home-page-title is-size-1 has-text-centered p-5">
+  Exercise Homepage
+</div>
 <div class="search-section">
   <form class="mt-4">
     <div class="field is-horizontal">
       <div class="field-body">
-        <style>
-  .search-section .field-body {
-    padding: .5rem;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 87rem;
-  }
-</style>
         <div class="field">
           <label for="difficulty" class="label">Difficulty</label>
           <div class="control">
@@ -67,48 +60,42 @@
           </div>
         </div>
 
-        <div class="field">
-          <div class="control">
-            <button type="submit" class="button is-primary is-fullwidth mt-4">Search</button>
-          </div>
-        </div>
+            <button type="submit" class="button search-btn">Search</button>
       </div>
     </div>
+    
   </form>
 </div>
-
 </div>
-
-<div id="exercise-list" class="rows is-multiline mt-6">
- {{!-- *temporary* --}}
-  <style>
-  .row {
-    padding: .5rem;
-    max-width: 87rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-</style>
-
-    {{#each exercises as |exercise|}}
-      <div class="row is-one-third">
-        <div class="card mt-8">
-          <div class="card-content">
-            <p class="title is-4 has-text-centered">{{name}}</p>
-            <p class="subtitle is-4 has-text-weight-bold">Exercise Type:</p>
-            <p class="subtitle">{{exercise.type}}</p>
-            <p class="subtitle is-4 has-text-weight-bold">Muscle Group:</p>
-            <p class="subtitle">{{exercise.muscle}}</p>
-            <p class="subtitle is-4 has-text-weight-bold">Difficulty:</p>
-            <p class="subtitle">{{exercise.difficulty}}</p>
-            <p class="subtitle is-4 has-text-weight-bold">Instructions:</p>
+<div class="card-section">
+{{#each exercises as |exercise|}}
+<div class="home-card card pb-2 m-3">
+  <header class="card-header is-flex is-align-items-center is-justify-content-space-between	">
+    <p class="is-size-5 has-text-weight-bold	">{{name}} </p>
+     <button class="button add-exercise-button" onclick="addExercise({{exercise.id}})" data-exercise-id="{{exercise.id}}">Add</button>
+  </header>
+  <div class="card-content mb-0 mt-3 p-0">
+    <table class="table">
+    <tr>
+      <th>Exercise:</th>
+      <th>Muscle:</th>
+      <th>Difficulty:</th>
+    </tr>
+  <tbody>
+    <tr>
+      <td>{{exercise.type}}</td>
+      <td>{{exercise.muscle}}</td>
+      <td>{{exercise.difficulty}}</td>
+  </tbody>
+</table>
+<hr class="p-0 m-0">
+    <div class="content px-5 my-5">
+            <p class="subtitle has-text-weight-bold">Instructions:</p>
             <p>{{exercise.instructions}}</p>
-            <button class="button add-exercise-button is-primary is-fullwidth mt-4" onclick="addExercise({{exercise.id}})" data-exercise-id="{{exercise.id}}">Add</button>
-          </div>
-        </div>
-      </div>
-    {{/each}}
+    </div>
   </div>
+</div>
+    {{/each}}
 </div>
 
 <script src="/js/getFilteredExercises.js"></script>
