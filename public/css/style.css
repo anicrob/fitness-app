@@ -84,3 +84,7 @@ hr {
   background-color: green;
   color:white
 }
+.blue-button{
+  background-color:var(--blue);
+  color:white;
+}
