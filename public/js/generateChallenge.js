@@ -9,7 +9,8 @@ const createChallenge = async () => {
     //refresh page
     document.location.replace('/profile');
   } else {
-    alert('Please save at least 3 exercises before creating a challenge!');
+    const { message } = await response.json();
+    alert(message);
     return;
   }
 };

@@ -18,11 +18,11 @@ ExerciseChallenge.init(
       references: {
         model: 'exercise',
         key: 'id',
-        unique: false,
       },
     },
     numExercises: {
       type: DataTypes.INTEGER,
+      unique: false,
     },
   },
   {
