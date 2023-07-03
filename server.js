@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const helpers = require('./utils/helpers.js').default;
+const helpers = require('./utils/helpers.js');
 
 const sequelize = require('./db/config');
 const routes = require('./controllers');

@@ -71,24 +71,30 @@ router.post('/', async (req, res) => {
         completed: 0,
         user_id: req.session.user_id,
       });
+
+      //serialize data
       const newChallenge = newChallengeData.get({ plain: true });
+
       //const randomExercises = loop through exerciseIds and pick 3 random excercise Ids
       const randomExercises = await generateRandomExercises(exerciseIds);
-      console.log(randomExercises);
+      console.log('ranEx', randomExercises);
+
       //const randomNumbers = pick 3 random numbers from 1 to 100
       const randomNumbers = await generateRandomNumbers();
-      console.log(randomNumbers);
+      console.log('ranNum', randomNumbers);
+
       //declare empty array to store records to bulkCreate later
       const ExerciseChallengeRecords = [];
 
-      //looping through both arrays,
+      //looping through,
       for (let i = 0; i < randomExercises.length; i++) {
-        //create the record object
+        //create the record objects
         let newChallengeExercise = {
           challenge_id: newChallenge.id,
           exercise_id: randomExercises[i],
           numExercises: randomNumbers[i],
         };
+
         //and store them in the ExerciseChallengeRecords array
         ExerciseChallengeRecords.push(newChallengeExercise);
       }
@@ -99,14 +105,16 @@ router.post('/', async (req, res) => {
         );
         res.status(200).json(ExerciseChallengesCreated);
       } catch (err) {
-        res.status(400).json(err);
+        res.status(400).json({ message: err });
       }
       //if they don't have at least 3 exercises saved, let the user know they need to add more exercises
     } else {
-      res.status(400).json();
+      res
+        .status(400)
+        .json({ message: 'Save 3 exercises before creating a challenge!' });
     }
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json({ message: err });
   }
 });
 
