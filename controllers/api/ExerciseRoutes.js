@@ -77,15 +77,8 @@ router.post('/:id', async (req, res) => {
 //remove exercise from user's account
 router.delete('/:id', async (req, res) => {
   try {
-    const deleteRecord = await UserExercise.findOne({
-      where: {
-        exercise_id: req.params.id,
-        user_id: req.session.user_id,
-      },
-    });
-    const deleteRecordId = deleteRecord.id;
     const response = await UserExercise.destroy({
-      where: { id: deleteRecordId },
+      where: { exercise_id: req.params.id, user_id: req.session.user_id },
     });
     res.status(200).json(response);
   } catch (err) {

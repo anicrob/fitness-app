@@ -95,7 +95,7 @@
     <div class="m-5 card">
   <header class="card-header is-flex is-align-items-center is-justify-content-space-between">
     <p>{{exercise.name}}</p>
-        <button data-exercise-id="{{exercise.id}}" class="remove-exerciseBtn button">X</button>
+        <button data-exercise-id="{{exercise.id}}" onclick="deleteExercise({{exercise.id}})" class="remove-exerciseBtn button">X</button>
   </header>
   <div class="card-content">
     <table class="table ">
