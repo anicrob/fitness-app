@@ -40,7 +40,7 @@ function renderSearchResults(data) {
             <div class="card-content mb-0 mt-3 p-0">
               <table class="table">
                 <tr>
-                  <th>Exercise:</th>
+                  <th>Type:</th>
                   <th>Muscle:</th>
                   <th>Difficulty:</th>
                 </tr>
