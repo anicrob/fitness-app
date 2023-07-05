@@ -37,6 +37,7 @@ document.querySelector('#logout').addEventListener('click', () => {
   clearTimeout(messageTimeout);
   resetTimers();
   clearMessage();
+  logout();
 });
 // event listeners to reset the timers when either listener is triggered
 document.addEventListener('click', () => {
