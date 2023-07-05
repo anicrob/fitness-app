@@ -14,7 +14,7 @@ require('dotenv').config();
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
   cookie: {
-    maxAge: 600000,
+    maxAge: 900000,
     httpOnly: true,
     secure: false,
     sameSite: 'strict',
