@@ -17,28 +17,40 @@ User.init(
       allowNull: false,
       primaryKey: true,
     },
-    firstName: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true,
-      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [7],
+        len: [8],
       },
+    },
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    height: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    weight: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    BMI: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    numSavedExercises: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    numCompletedChallenges: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {
@@ -58,7 +70,8 @@ User.init(
     },
     sequelize,
     underscored: true,
-    modelName: 'User',
+    freezeTableName: true,
+    modelName: 'user',
   }
 );
 

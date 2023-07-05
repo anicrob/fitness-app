@@ -1,14 +1,90 @@
+/* our logo colors */
+:root {
+  --blue: #1f47f2;
+  --red: #e93f33;
+}
+
 body {
   background-color: #eeeeee;
 }
 
 .logo-sm {
-  width: 50px;
-  height: 50px;
+  width: 150px;
+  height: 100px;
 }
 
 .nav-btn {
-  background: none !important;
-  border: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
   cursor: pointer;
+  border: none;
+  color: var(--blue);
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px;
+}
+
+.card-section{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: stetch;
+  justify-content:center;
+}
+.home-card {
+  max-width: 29%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.card-header{
+  background-color: var(--blue);
+  color: white;
+}
+.add-exercise-button{
+ background-color:var(--red);
+ color: white;
+}
+hr {
+  height: 3px;
+  background-color: var(--blue);
+  border: none;
+}
+.is-blue{
+  color:var(--blue);
+}
+.is-red{
+  color:var(--red);
+}
+.search-btn{
+  max-width: 100%;
+  height: 41px;
+  width: 100px;
+  background-color:var(--red);
+  color: white;
+}
+.search-section .field-body {
+  padding: .5rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 87rem;
+  align-items:flex-end;
+}
+.red-button{
+  background-color:var(--red);
+  color:white;
+}
+.green-button{
+  background-color: green;
+  color:white
+}
+.blue-button{
+  background-color:var(--blue);
+  color:white;
 }
