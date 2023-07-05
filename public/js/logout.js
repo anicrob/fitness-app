@@ -19,12 +19,12 @@ const resetTimers = () => {
   logoutTimer = setTimeout(() => {
     // logs the user out after 15 mins has elapsed
     logout();
-  }, 600000);
-  // renders an alert to handlebars when there is 30 seconds left of session time.
+  }, 900000);
+  // renders an alert to handlebars when there is 5 minutes left of session time.
   messageTimeout = setTimeout(() => {
     document.querySelector('#sessionTimeoutMessage').textContent =
       'Your session will expire in 5 minutes!';
-  }, 300000);
+  }, 600000);
 };
 // sets variable to clear message when the event listener is triggered
 const clearMessage = () => {
@@ -45,15 +45,15 @@ document.addEventListener('click', () => {
   clearMessage();
   setTimeout(() => {
     document.querySelector('#sessionTimeoutMessage').textContent =
-      'Your session will expire in 30 seconds.';
-  }, 300000);
+      'Your session will expire in 5 minutes!';
+  }, 600000);
 });
 document.addEventListener('keypress', () => {
   resetTimers();
   clearMessage();
   setTimeout(() => {
     document.querySelector('#sessionTimeoutMessage').textContent =
-      'Your session will expire in 30 seconds.';
-  }, 300000);
+      'Your session will expire in 5 minutes!';
+  }, 600000);
 });
 resetTimers();
