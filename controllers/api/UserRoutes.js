@@ -32,7 +32,12 @@ router.get('/', async (req, res) => {
 //create a new user
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create();
+    const { username, password } = req.body;
+
+    const userData = await User.create({
+      username,
+      password,
+    });
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -171,36 +176,30 @@ router.put('/numCompletedChallenges', async (req, res) => {
 //login the user - this creates a new session
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({
-      where: { username: req.body.username },
-    });
+    const { username, password } = req.body;
 
-    if (!userData) {
+    if (!username || !password) {
       res
         .status(400)
-        .json({ message: 'Incorrect username or password, please try again' });
+        .json({ message: 'Incorrect username or password, please try again.' });
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const userData = await User.findOne({ where: { username } });
 
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+    if (!userData || !userData.checkPassword(password)) {
+      res.status(401).json({
+        message: 'Incorrect username or password, please try again.',
+      });
       return;
     }
 
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
+    req.session.user_id = userData.id;
+    req.session.logged_in = true;
 
-      res
-        .status(200)
-        .json({ user: userData, message: 'You are now logged in!' });
-    });
+    res.status(200).json({ user: userData, message: 'You are now logged in!' });
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

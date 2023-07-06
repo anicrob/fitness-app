@@ -5,21 +5,35 @@ const signupFormHandler = async event => {
   const username = document.querySelector('#username').value.trim();
   const password = document.querySelector('#password').value.trim();
 
-  //create new user
-  if (username && password) {
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (!username || !password) {
+    displayError('You must enter a username and password to register.');
+    return;
+  }
 
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert(response.statusText);
-    }
+  if (password.length < 8) {
+    displayError('Password needs to be least 8 characters long.');
+    return;
+  }
+
+  const response = await fetch('/api/users', {
+    method: 'POST',
+    body: JSON.stringify({ username, password }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    document.location.replace('/');
+  } else {
+    const { err } = await response.json();
+    displayError(err);
   }
 };
+
+const displayError = errMessage => {
+  const errContainer = document.getElementById('err-container');
+  errContainer.textContent = errMessage;
+};
+
 //event listener
 document
   .querySelector('#registration-form')

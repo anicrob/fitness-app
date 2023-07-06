@@ -6,22 +6,37 @@ const loginFormHandler = async event => {
   const username = document.querySelector('#username').value.trim();
   const password = document.querySelector('#password').value.trim();
 
-  if (username && password) {
-    // Send a POST request to the API endpoint
-    const response = await fetch('/api/users/login', {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (!username || !password) {
+    displayError('Please enter a username and password.');
+    return;
+  }
 
-    if (response.ok) {
-      // If successful, redirect the browser to the dashboard page
-      document.location.replace('/');
-    } else {
-      alert(response.statusText);
-    }
+  const response = await fetch('/api/users/login', {
+    method: 'POST',
+    body: JSON.stringify({ username, password }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    document.location.replace('/');
+  } else {
+    const errorMessage =
+      errorMessages[response.status] ||
+      'There has been an error, please try again.';
+    displayError(errorMessage);
   }
 };
+
+const errorMessages = {
+  401: 'Incorrect username or password.',
+  500: 'Internal server error. Please try again later.',
+};
+
+const displayError = errMessage => {
+  const errContainer = document.getElementById('err-container');
+  errContainer.textContent = errMessage;
+};
+
 //event listener
 document
   .querySelector('.login-form')
