@@ -111,6 +111,7 @@
       <td>{{exercise.muscle}}</td>
       <td>{{exercise.difficulty}}</td>
       <td>{{exercise.equipment}}</td>
+    </tr>
   </tbody>
 </table>
    <p class="subtitle has-text-weight-bold">Instructions:</p>
@@ -122,6 +123,34 @@
   Save an exercise today!
   {{/if}}
 </div>
+<style>
+  @media (max-width: 850px) {
+  .is-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 596px) {
+  .table {
+    overflow-x: auto;
+    display: block;
+    width: 100%;
+    table-layout: fixed;
+  }
+  .table::-webkit-scrollbar {
+  width: 10px;
+}
+.table::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.table::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.table::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+}
+</style>
 <script src="/js/saveUserData.js"></script>
 <script src="/js/removeSavedExercise.js"></script>
 {{#if challenge.id}}
