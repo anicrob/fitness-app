@@ -100,6 +100,21 @@
 </div>
     {{/each}}
 </div>
-
+<style>
+  @media (max-width: 767px) {
+  .card-section {
+    justify-content: flex-start;
+  }
+  .home-card {
+    max-width: 100%;
+  }
+  .search-section .field-body {
+    max-width: none;
+  }
+  .table {
+    max-width: 20%
+  }
+}
+</style>
 <script src="/js/getFilteredExercises.js"></script>
 <script src="/js/addExercise.js"></script>
