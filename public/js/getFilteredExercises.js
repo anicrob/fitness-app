@@ -6,7 +6,8 @@ function handleFormSubmit(event) {
   const muscle = document.getElementById('muscle').value;
   const type = document.getElementById('type').value;
 
-  const url = `http://localhost:3001/api/exercises/filter?difficulty=${difficulty}&muscle=${muscle}&type=${type}`;
+  const baseEndpoint = 'https://challenge-fitness-9cf387429034.herokuapp.com/';
+  const url = `${baseEndpoint}api/exercises/filter?difficulty=${difficulty}&muscle=${muscle}&type=${type}`;
 
   fetch(url)
     .then(response => response.json())
