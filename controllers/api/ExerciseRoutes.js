@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
     const exercises = exerciseData.map(exercise =>
       exercise.get({ plain: true })
     );
-    console.log('sending exercises>>>>>', exercises);
     // Pass serialized data and session flag into template
     res.json(exercises);
   } catch (err) {

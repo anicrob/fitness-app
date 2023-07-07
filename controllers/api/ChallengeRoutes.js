@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
     const challenge = challengeData.map(challenge =>
       challenge.get({ plain: true })
     );
-    console.log('sending challenges>>>>>', challenge);
+
     // Pass serialized data and session flag into template
     res.json(challenge);
   } catch (err) {
@@ -77,11 +77,9 @@ router.post('/', async (req, res) => {
 
       //const randomExercises = loop through exerciseIds and pick 3 random excercise Ids
       const randomExercises = await generateRandomExercises(exerciseIds);
-      console.log('ranEx', randomExercises);
 
       //const randomNumbers = pick 3 random numbers from 1 to 100
       const randomNumbers = await generateRandomNumbers();
-      console.log('ranNum', randomNumbers);
 
       //declare empty array to store records to bulkCreate later
       const ExerciseChallengeRecords = [];

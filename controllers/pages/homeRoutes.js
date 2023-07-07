@@ -18,7 +18,6 @@ router.get('/', isAuthenticated, async (req, res) => {
     const exercises = exerciseData.map(exercise =>
       exercise.get({ plain: true })
     );
-    console.log('sending exercises>>>>>', exercises);
     // Pass serialized data and session flag into template
     res.render('homepage', {
       exercises,
@@ -63,8 +62,7 @@ router.get('/profile', isAuthenticated, async (req, res) => {
       return;
     }
     const challenge = challengeData.get({ plain: true });
-    console.log('this is the user data>>>>>>>', user);
-    console.log('this is the challenge data>>>>>>>', challenge);
+
     res.render('profile', {
       user,
       challenge,
