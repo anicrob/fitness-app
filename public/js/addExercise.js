@@ -6,8 +6,9 @@ const addExercise = async id => {
   });
 
   if (response.ok) {
+    showModal('<h2>Exercise added!</h2>');
   } else {
-    alert('This exercise has already been added!');
+    showModal('<h2>This exercise has already been added!</h2>');
     return;
   }
   const updateProfile = await fetch('/api/users/numSavedExercises', {
@@ -17,6 +18,6 @@ const addExercise = async id => {
 
   if (updateProfile.ok) {
   } else {
-    alert(response.statusText);
+    showModal(`${response.statusText}`);
   }
 };

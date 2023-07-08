@@ -2,10 +2,32 @@
 :root {
   --blue: #1f47f2;
   --red: #e93f33;
+  --green: #6BAA75;
 }
 
 body {
   background-color: #eeeeee;
+}
+
+.modal-background {
+  background-color: rgba(10, 10, 10, .5);
+}
+
+.modal-card-foot {
+  justify-content: flex-end;
+}
+
+.delete {
+  background-color: var(--red);
+}
+
+.modal-delete {
+  background-color: rgba(10, 10, 10, .2);
+}
+
+select,
+.select {
+  width: 100%;
 }
 
 .logo-sm {
@@ -29,62 +51,134 @@ body {
   border-radius: 12px;
 }
 
-.card-section{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: stetch;
-  justify-content:center;
+.card-section {
+  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
+
 .home-card {
-  max-width: 29%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
-.card-header{
+
+.card-header {
   background-color: var(--blue);
   color: white;
 }
-.add-exercise-button{
- background-color:var(--red);
- color: white;
+
+.add-exercise-button {
+  background-color: var(--green);
+  color: white;
 }
+
 hr {
   height: 3px;
   background-color: var(--blue);
   border: none;
 }
-.is-blue{
-  color:var(--blue);
+
+.is-blue {
+  color: var(--blue);
 }
-.is-red{
-  color:var(--red);
+
+.is-red {
+  color: var(--red);
 }
-.search-btn{
-  max-width: 100%;
+
+.search-btn {
+  width: auto;
   height: 41px;
-  width: 100px;
-  background-color:var(--red);
+  background-color: var(--red);
   color: white;
 }
+
 .search-section .field-body {
-  padding: .5rem;
+  padding: 1rem;
   margin-left: auto;
   margin-right: auto;
   max-width: 87rem;
-  align-items:flex-end;
+  align-items: flex-end;
 }
-.red-button{
-  background-color:var(--red);
-  color:white;
+
+.red-button {
+  background-color: var(--red);
+  color: white;
 }
-.green-button{
+
+.green-button {
   background-color: green;
-  color:white
+  color: white
 }
-.blue-button{
-  background-color:var(--blue);
-  color:white;
+
+.blue-button {
+  background-color: var(--blue);
+  color: white;
+}
+
+.challenge-exercise-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 10px;
+}
+
+.challenge-exercise-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.saved-exercise-cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.saved-exercise-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.stat-item {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stat-header {
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.stat-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .search-btn {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .grid-body {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .saved-exercise-stats {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .challenge-exercise-cards,
+  .saved-exercise-cards {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
 }

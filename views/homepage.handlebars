@@ -2,119 +2,125 @@
 <div class="box home-page-title is-size-1 has-text-centered p-5">
   Exercise Homepage
 </div>
-<div class="search-section">
-  <form class="mt-4">
-    <div class="field is-horizontal">
-      <div class="field-body">
-        <div class="field">
-          <label for="difficulty" class="label">Difficulty</label>
-          <div class="control">
-            <div class="select">
-              <select id="difficulty" name="difficulty">
-                <option value=''>-- Select Difficulty --</option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="expert">Expert</option>
-              </select>
+<div class="container">
+  <div class="search-section">
+    <form class="mt-4">
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label for="difficulty" class="label">Difficulty</label>
+            <div class="control">
+              <div class="select">
+                <select id="difficulty" name="difficulty">
+                  <option value=''>-- Select Difficulty --</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="expert">Expert</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label for="muscle" class="label">Muscle</label>
-          <div class="control">
-            <div class="select">
-              <select id="muscle" name="muscle">
-                <option value="">-- Select Muscle --</option>
-                <option value="abdominals">Abdominals</option>
-                <option value="abductors">Abductors</option>
-                <option value="adductors">Adductors</option>
-                <option value="biceps">Biceps</option>
-                <option value="calves">Calves</option>
-                <option value="chest">Chest</option>
-                <option value="forearms">Forearms</option>
-                <option value="glutes">Glutes</option>
-                <option value="lats">Lats</option>
-                <option value="lower_back">Lower Back</option>
-                <option value="middle_back">Middle Back</option>
-                <option value="neck">Neck</option>
-                <option value="quadriceps">Quadriceps</option>
-                <option value="traps">Traps</option>
-              </select>
+          <div class="field">
+            <label for="muscle" class="label">Muscle</label>
+            <div class="control">
+              <div class="select">
+                <select id="muscle" name="muscle">
+                  <option value="">-- Select Muscle --</option>
+                  <option value="abdominals">Abdominals</option>
+                  <option value="abductors">Abductors</option>
+                  <option value="adductors">Adductors</option>
+                  <option value="biceps">Biceps</option>
+                  <option value="calves">Calves</option>
+                  <option value="chest">Chest</option>
+                  <option value="forearms">Forearms</option>
+                  <option value="glutes">Glutes</option>
+                  <option value="lats">Lats</option>
+                  <option value="lower_back">Lower Back</option>
+                  <option value="middle_back">Middle Back</option>
+                  <option value="neck">Neck</option>
+                  <option value="quadriceps">Quadriceps</option>
+                  <option value="traps">Traps</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label for="type" class="label">Type</label>
-          <div class="control">
-            <div class="select">
-              <select id="type" name="type">
-                <option value="">-- Select Filter --</option>
-                <option value="cardio">Cardio</option>
-                <option value="olympic_weightlifting">Olympic Weightlifting</option>
-                <option value="plyometrics">Plyometrics</option>
-                <option value="powerlifting">Powerlifting</option>
-                <option value="strength">Strength</option>
-                <option value="stretching">Stretching</option>
-                <option value="strongman">Strongman</option>
-              </select>
+          <div class="field">
+            <label for="type" class="label">Type</label>
+            <div class="control">
+              <div class="select">
+                <select id="type" name="type">
+                  <option value="">-- Select Filter --</option>
+                  <option value="cardio">Cardio</option>
+                  <option value="olympic_weightlifting">Olympic Weightlifting</option>
+                  <option value="plyometrics">Plyometrics</option>
+                  <option value="powerlifting">Powerlifting</option>
+                  <option value="strength">Strength</option>
+                  <option value="stretching">Stretching</option>
+                  <option value="strongman">Strongman</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
 
-            <button type="submit" class="button search-btn">Search</button>
+          <button type="submit" class="button search-btn">Search</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="card-section">
+    {{#each exercises as |exercise|}}
+    <div class="home-card card pb-2">
+      <header class="card-header is-flex is-align-items-center is-justify-content-space-between	">
+        <p class="is-size-5 has-text-weight-bold	">{{name}} </p>
+        <button class="button add-exercise-button" onclick="addExercise({{exercise.id}})"
+          data-exercise-id="{{exercise.id}}">Add +</button>
+      </header>
+      <div class="card-content mb-0 mt-3 p-0">
+        <table class="table">
+          <tr>
+            <th>Type:</th>
+            <th>Muscle:</th>
+            <th>Difficulty:</th>
+          </tr>
+          <tbody>
+            <tr>
+              <td>{{exercise.type}}</td>
+              <td>{{exercise.muscle}}</td>
+              <td>{{exercise.difficulty}}</td>
+          </tbody>
+        </table>
+        <hr class="p-0 m-0">
+        <div class="content px-5 my-5">
+          <p class="subtitle has-text-weight-bold">Instructions:</p>
+          <p>{{exercise.instructions}}</p>
+        </div>
       </div>
     </div>
-    
-  </form>
-</div>
-</div>
-<div class="card-section">
-{{#each exercises as |exercise|}}
-<div class="home-card card pb-2 m-3">
-  <header class="card-header is-flex is-align-items-center is-justify-content-space-between	">
-    <p class="is-size-5 has-text-weight-bold	">{{name}} </p>
-     <button class="button add-exercise-button" onclick="addExercise({{exercise.id}})" data-exercise-id="{{exercise.id}}">Add</button>
-  </header>
-  <div class="card-content mb-0 mt-3 p-0">
-    <table class="table">
-    <tr>
-      <th>Type:</th>
-      <th>Muscle:</th>
-      <th>Difficulty:</th>
-    </tr>
-  <tbody>
-    <tr>
-      <td>{{exercise.type}}</td>
-      <td>{{exercise.muscle}}</td>
-      <td>{{exercise.difficulty}}</td>
-  </tbody>
-</table>
-<hr class="p-0 m-0">
-    <div class="content px-5 my-5">
-            <p class="subtitle has-text-weight-bold">Instructions:</p>
-            <p>{{exercise.instructions}}</p>
-    </div>
-  </div>
-</div>
     {{/each}}
+  </div>
 </div>
 <style>
   @media (max-width: 1068px) {
-  .card-section {
-    justify-content: flex-start;
+    .card-section {
+      justify-content: flex-start;
+    }
+
+    .home-card {
+      max-width: 100%;
+    }
+
+    .search-section .field-body {
+      max-width: none;
+    }
+
+    .table {
+      max-width: 20%
+    }
   }
-  .home-card {
-    max-width: 100%;
-  }
-  .search-section .field-body {
-    max-width: none;
-  }
-  .table {
-    max-width: 20%
-  }
-}
 </style>
 <script src="/js/getFilteredExercises.js"></script>
 <script src="/js/addExercise.js"></script>

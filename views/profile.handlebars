@@ -1,159 +1,182 @@
 <div class="box dashboard-title is-size-1 has-text-centered p-5">
   👋 Welcome {{user.username}}!
 </div>
-<div class="box dashboard-title has-text-centered p-5">
-<nav class="is-flex is-justify-content-space-around	">
-    <a href="#details-stats"><p>View my health details and stats</p></a>
-    <a href="#current-challenge-pannel"><p>View my current challenge</p></a>
-    <a href="#saved-exercises"><p>View saved exercises</p></a>
-</nav>
-</div>
-<div id="details-stats" class="details-stats is-flex is-flex-wrap-wrap	is-justify-content-space-around">
-<div id="user-info-pannel" class="box mt-5 mb-0 " style="width: 30%;">
-  <p class="is-size-4">My Health Details:</p> <hr>
-  <p class="is-italic my-2">age:</p>
-    <input id="user-age" class="input" value="{{user.age}}">
-
-  <p class="is-italic my-2">height:</p>
-    <input id="user-height" class="input is-italic" value="{{user.height}}">
-
-  <p class="is-italic my-2"> weight:</p>
-    <input id="user-weight" class="input" value="{{user.weight}}">
-
-  <p class="is-italic my-2">BMI:</p>
-    <input id="user-BMI" class="input" value="{{user.BMI}}">
-  <button data-user-id="{{user.id}}" id="save-user-health-details" class="my-2 button">Save</button>
-  <div id="result-container"></div>
-</div>
-<div id="profile-stats-pannel" class="box mt-5" style="width: 30%;">
-      <p class="is-size-4">My Stats:</p> <hr>
-  <p class="is-italic">Number of currently saved exercises:</p><br>
-    {{#if user.numSavedExercises}}
-    <p>{{user.numSavedExercises}}</p><br>
-    {{else}}
-    <p>Start today by going to the homepage and saving an exercise!</p><br>
-    {{/if}}
-
-  <p class="is-italic">Number of completed challenges:</p><br>
-    {{#if user.numCompletedChallenges}}
-    {{user.numCompletedChallenges}}
-    {{else}}
-    Complete a challenge today!
-    {{/if}}
-</div>
-</div>
-<div id="current-challenge-pannel" class="box mx-5 mt-5">
-    <nav class="is-flex is-justify-content-space-between">
-<p class="is-size-4 has-text-centered has-text-weight-bold">My Current Challenge ⛰️</p>
-      {{#if challenge.id}}
-    <div class="is-flex">
-    <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button mr-3 red-button" onclick= "giveUpChallenge({{challenge.id}})">Give Up 😩</button>
-  <button data-challenge-id="{{challenge.id}}" id="btn-complete" class="button green-button" onclick="completeChallenge({{challenge.id}})">Completed 💪</button>
-    </div>
-    {{else}}
-        <p class="mt-3 is-italic">Generate a challenge to get started!</p>
-    <button id = "generate-challenge-btn" class="button blue-button">Generate Challenge! ⛰️</button>
-    </div>
-    {{/if}}
+<div class="container">
+  <div class="box dashboard-title has-text-centered p-5">
+    <nav class="is-flex is-justify-content-space-around	">
+      <a href="#details-stats">
+        <p>View my health details and stats</p>
+      </a>
+      <a href="#current-challenge-pannel">
+        <p>View my current challenge</p>
+      </a>
+      <a href="#saved-exercises">
+        <p>View saved exercises</p>
+      </a>
     </nav>
+  </div>
+  <div id="details-stats" class="details-stats is-flex is-flex-wrap-wrap is-justify-content-space-evenly mb-5">
+    <div id="user-info-pannel" class="box">
+      <p class="is-size-4">My Health Details:</p>
+      <hr>
+      <p class="is-italic my-2">age:</p>
+      <input id="user-age" class="input" value="{{user.age}}">
+
+      <p class="is-italic my-2">height:</p>
+      <input id="user-height" class="input is-italic" value="{{user.height}}">
+
+      <p class="is-italic my-2"> weight:</p>
+      <input id="user-weight" class="input" value="{{user.weight}}">
+
+      <p class="is-italic my-2">BMI:</p>
+      <input id="user-BMI" class="input" value="{{user.BMI}}">
+      <button data-user-id="{{user.id}}" id="save-user-health-details" class="my-2 button">Save</button>
+      <div id="result-container"></div>
+    </div>
+    <div id="profile-stats-pannel" class="box">
+      <p class="is-size-4">My Stats:</p>
+      <hr>
+      <p class="is-italic">Number of currently saved exercises:</p><br>
+      {{#if user.numSavedExercises}}
+      <p>{{user.numSavedExercises}}</p><br>
+      {{else}}
+      <p>Start today by going to the homepage and saving an exercise!</p><br>
+      {{/if}}
+
+      <p class="is-italic">Number of completed challenges:</p><br>
+      {{#if user.numCompletedChallenges}}
+      {{user.numCompletedChallenges}}
+      {{else}}
+      Complete a challenge today!
+      {{/if}}
+    </div>
+  </div>
+  <div id="current-challenge-pannel" class="box">
+    <nav class="is-flex is-justify-content-space-between mb-4">
+      <p class="is-size-4 has-text-centered has-text-weight-bold">My Current Challenge ⛰️</p>
+      {{#if challenge.id}}
+      <div class="is-flex">
+        <button data-challenge-id="{{challenge.id}}" id="btn-giveup" class="button mr-3 red-button"
+          onclick="giveUpChallenge({{challenge.id}})">Give Up 😩</button>
+        <button data-challenge-id="{{challenge.id}}" id="btn-complete" class="button green-button"
+          onclick="completeChallenge({{challenge.id}})">Completed 💪</button>
+      </div>
+      {{else}}
+      <p class="mt-3 is-italic">Generate a challenge to get started!</p>
+      <button id="generate-challenge-btn" class="button blue-button">Generate Challenge! ⛰️</button>
+  </div>
+  {{/if}}
+  </nav>
   {{#if challenge.id}}
-  {{#each challenge.exercises as |exercise|}}
-  <div class="exercise-card">
-<div class="card m-5">
-  <header class="card-header is-flex is-align-items-center is-justify-content-space-between">
-    <p>✘<span class="is-red has-text-weight-bold">{{exercise.exercisechallenge.numExercises}}</span> {{exercise.name}}</p>
-  </header>
-  <div class="card-content">
-    <table class="table ">
-    <tr>
-      <th>Exercise Type:</th>
-      <th>Muscle Group:</th>
-      <th>Difficulty:</th>
-      <th>Equipment:</th>
-    </tr>
-  <tbody>
-    <tr>
-      <td>{{exercise.type}}</td>
-      <td>{{exercise.muscle}}</td>
-      <td>{{exercise.difficulty}}</td>
-      <td>{{exercise.equipment}}</td>
-  </tbody>
-</table>
-   <p class="subtitle has-text-weight-bold">Instructions:</p>
-    <p>{{exercise.instructions}}</p>
+  <div class="challenge-exercise-cards">
+    {{#each challenge.exercises as |exercise|}}
+    <div class="exercise-card">
+      <div class="card">
+        <header
+          class="card-header is-flex is-flex-direction-row is-align-items-center is-justify-content-space-between">
+          <p>✘<span class="is-red has-text-weight-bold">{{exercise.exercisechallenge.numExercises}}</span>
+            {{exercise.name}}
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="challenge-exercise-stats">
+            <div class="stat-item">
+              <h2 class="stat-header">Exercise Type</h2>
+              <div class="stat-body">
+                {{exercise.type}}
+              </div>
+            </div>
+            <div class="stat-item">
+              <h2 class="stat-header">Muscle Group</h2>
+              <div class="stat-body">
+                {{exercise.muscle}}
+              </div>
+            </div>
+            <div class="stat-item">
+              <h2 class="stat-header">Difficulty</h2>
+              <div class="stat-body">
+                {{exercise.difficulty}}
+              </div>
+            </div>
+            <div class="stat-item">
+              <h2 class="stat-header">Equipment</h2>
+              <div class="stat-body">
+                {{exercise.equipment}}
+              </div>
+            </div>
+          </div>
+          <p class="subtitle has-text-weight-bold">Instructions:</p>
+          <p>{{exercise.instructions}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
   </div>
-</div>
-  </div>
-  {{/each}} 
   {{/if}}
 </div>
-<div id="saved-exercises" class="section box mx-5 mt-5">
-  <p class="is-size-4 has-text-centered has-text-weight-bold">My Saved Exercises</p>
+<div id="saved-exercises" class="section box">
+  <p class="is-size-4 has-text-centered has-text-weight-bold mb-4">My Saved Exercises</p>
   {{#if user.exercises}}
-  {{#each user.exercises as |exercise|}}
-  <div class="saved-exercise-card">
-    <div class="m-5 card">
-  <header class="card-header is-flex is-align-items-center is-justify-content-space-between">
-    <p>{{exercise.name}}</p>
-        <button data-exercise-id="{{exercise.id}}" onclick="deleteExercise({{exercise.id}})" class="remove-exerciseBtn button">X</button>
-  </header>
-  <div class="card-content">
-    <table class="table ">
-    <tr>
-      <th>Exercise Type:</th>
-      <th>Muscle Group:</th>
-      <th>Difficulty:</th>
-      <th>Equipment:</th>
-    </tr>
-  <tbody>
-    <tr>
-      <td>{{exercise.type}}</td>
-      <td>{{exercise.muscle}}</td>
-      <td>{{exercise.difficulty}}</td>
-      <td>{{exercise.equipment}}</td>
-    </tr>
-  </tbody>
-</table>
-   <p class="subtitle has-text-weight-bold">Instructions:</p>
-    <p>{{exercise.instructions}}</p>
-</div>
-</div>
-  {{/each}}
+  <div class="saved-exercise-cards">
+    {{#each user.exercises as |exercise|}}
+    <div class="saved-exercise-card">
+      <div class="card">
+        <header
+          class="card-header is-flex is-flex-direction-row is-align-items-center is-justify-content-space-between">
+          <p>{{exercise.name}}</p>
+          <button data-exercise-id="{{exercise.id}}" onclick="deleteExercise({{exercise.id}})" class="delete">X</button>
+        </header>
+        <div class="card-content">
+          <div class="saved-exercise-stats">
+            <div class="stat-item">
+              <h2 class="stat-header">Exercise Type</h2>
+              <div class="stat-body">
+                {{exercise.type}}
+              </div>
+            </div>
+            <div class="stat-item">
+              <h2 class="stat-header">Muscle Group</h2>
+              <div class="stat-body">
+                {{exercise.muscle}}
+              </div>
+            </div>
+            <div class="stat-item">
+              <h2 class="stat-header">Difficulty</h2>
+              <div class="stat-body">
+                {{exercise.difficulty}}
+              </div>
+            </div>
+            <div class="stat-item">
+              <h2 class="stat-header">Equipment</h2>
+              <div class="stat-body">
+                {{exercise.equipment}}
+              </div>
+            </div>
+          </div>
+          <p class="subtitle has-text-weight-bold">Instructions:</p>
+          <p>{{exercise.instructions}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
   {{else}}
   Save an exercise today!
   {{/if}}
 </div>
+</div>
 <style>
   @media (max-width: 850px) {
-  .is-flex {
-    flex-direction: column;
-    align-items: center;
-  }
+    .is-flex {
+      flex-direction: column;
+      align-items: center;
+    }
+
     #user-info-pannel,
     #profile-stats-pannel {
-      width: 80% !important;
+      width: 100%;
     }
-}
-@media screen and (max-width: 596px) {
-  .table {
-    overflow-x: auto;
-    display: block;
-    width: 100%;
-    table-layout: fixed;
   }
-  .table::-webkit-scrollbar {
-  width: 10px;
-}
-.table::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-.table::-webkit-scrollbar-thumb {
-  background: #888;
-}
-.table::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-}
 </style>
 <script src="/js/saveUserData.js"></script>
 <script src="/js/removeSavedExercise.js"></script>
@@ -162,4 +185,3 @@
 {{else}}
 <script src="/js/generateChallenge.js"></script>
 {{/if}}
-
